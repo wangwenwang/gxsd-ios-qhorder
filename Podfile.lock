@@ -1,0 +1,62 @@
+PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
+  - BaiduMapKit (3.3.4)
+  - GTSDK (2.4.0.0-noidfa)
+  - LMProgressView (1.0.3)
+  - MBProgressHUD (1.0.0)
+  - MHTextField (0.6)
+  - SSZipArchive (2.1.5)
+  - WechatOpenSDK (1.8.7.1)
+  - XHTextField (1.1)
+
+DEPENDENCIES:
+  - AFNetworking (~> 3.0)
+  - BaiduMapKit (~> 3.3.4)
+  - GTSDK (= 2.4.0.0-noidfa)
+  - LMProgressView
+  - MBProgressHUD (~> 1.0.0)
+  - MHTextField (~> 0.5)
+  - SSZipArchive
+  - WechatOpenSDK (~> 1.8.7.1)
+  - XHTextField
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - AFNetworking
+    - BaiduMapKit
+    - GTSDK
+    - LMProgressView
+    - MBProgressHUD
+    - MHTextField
+    - SSZipArchive
+    - WechatOpenSDK
+    - XHTextField
+
+SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  BaiduMapKit: 6f2d76a04b72e9af938afb5ca0f97d4417bbf9c0
+  GTSDK: 1774ee87826d0606f69b1c5114ed3bf63ad5c34e
+  LMProgressView: f6fb98f7ad2a0ef00156f892eef6c99b7046b66c
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  MHTextField: c13dad029b2a3da5e6a1c7adc7fa499ca8a976e5
+  SSZipArchive: cefe1364104a0231268a5deb8495bdf2861f52f0
+  WechatOpenSDK: 6a4d1436c15b3b5fe2a0bd383f3046010186da44
+  XHTextField: 67abde300d82c46940215dd939f96acda90f4e05
+
+PODFILE CHECKSUM: 4f6c4d4da50580c46dda1e756057e219a6b189fb
+
+COCOAPODS: 1.9.1
