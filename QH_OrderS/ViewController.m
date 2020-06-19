@@ -293,10 +293,13 @@
             });
             
             // 发送APP版本号
-//            [IOSToVue TellVueVersionShow:weakSelf.webView andVersion:[NSString stringWithFormat:@"版本:%@", [Tools getCFBundleShortVersionString]]];
+            [IOSToVue TellVueVersionShow:weakSelf.webView andVersion:[Tools getCFBundleShortVersionString]];
             
             // 发送设备标识
-//            [IOSToVue TellVueDevice:weakSelf.webView andDevice:@"iOS"];
+            [IOSToVue TellVueDevice:weakSelf.webView andDevice:@"iOS"];
+            
+            // 发送用户信息
+            [IOSToVue TellVueUserInfo:weakSelf.webView andUserInfo:[Tools getUserInfo]];
         }
         else if([message.body[@"a"] isEqualToString:@"微信登录"]){
             SendAuthReq* req = [[SendAuthReq alloc] init];
@@ -306,6 +309,22 @@
                 
                 [WXApi sendReq:req completion:nil];
             });
+        }
+        else if([message.body[@"a"] isEqualToString:@"用户信息"]){
+            
+            [Tools setUserInfo:message.body[@"b"]];
+        }
+        else if([message.body[@"a"] isEqualToString:@"文章阅读时长"]){
+            
+            
+            NSString *b = message.body[@"b"];
+            [Tools setReadAccumTime:message.body[@"b"]];
+        }
+        else if([message.body[@"a"] isEqualToString:@"取文_章阅读时长"]){
+            NSString *b = [Tools geReadAccumTime];
+            NSLog(@"%@", b);
+            // 发送文章阅读时长
+            [IOSToVue TellVueReadAccumTime:weakSelf.webView andReadAccumTime:[Tools geReadAccumTime]];
         }
     }
 }

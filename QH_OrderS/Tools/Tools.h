@@ -12,6 +12,18 @@
 
 @interface Tools : NSObject
 
+/// 获取文章阅读时长
++ (nullable NSString *)geReadAccumTime;
+
+/// 存储文章阅读时长
++ (void)setReadAccumTime:(nullable NSString *)readAccumTime;
+
+/// 获取用户信息
++ (nullable NSString *)getUserInfo;
+
+/// 存储用户信息
++ (void)setUserInfo:(nullable NSString *)userInfo;
+
 /// 获取zip版本号
 + (nullable NSString *)getZipVersion;
 

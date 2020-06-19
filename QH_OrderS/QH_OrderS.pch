@@ -36,6 +36,12 @@
 
 #define kReceive_WebView_Notification @"Receive_WebView_Notification"
 
+// 用户信息
+#define kUserDefaults_UserInfo_local_key @"UserInfo"
+
+// 文章阅读时长
+#define kUserDefaults_ReadAccumTime_local_key @"ReadAccumTime"
+
 #define kUserDefaults_ZipVersion_local_key @"ZipVersion"
 
 #define kUserDefaults_ZipVersion_local_defaultValue @"0.0.1"

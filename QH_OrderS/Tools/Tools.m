@@ -18,6 +18,28 @@
 
 @implementation Tools
 
++ (nullable NSString *)geReadAccumTime {
+    
+    return [[NSUserDefaults standardUserDefaults] stringForKey:kUserDefaults_ReadAccumTime_local_key];
+}
+
++ (void)setReadAccumTime:(nullable NSString *)readAccumTime {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:readAccumTime forKey:kUserDefaults_ReadAccumTime_local_key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (nullable NSString *)getUserInfo {
+    
+    return [[NSUserDefaults standardUserDefaults] stringForKey:kUserDefaults_UserInfo_local_key];
+}
+
++ (void)setUserInfo:(nullable NSString *)userInfo {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:userInfo forKey:kUserDefaults_UserInfo_local_key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 + (nullable NSString *)getZipVersion {
     
     return [[NSUserDefaults standardUserDefaults] stringForKey:kUserDefaults_ZipVersion_local_key];

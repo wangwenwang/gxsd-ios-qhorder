@@ -76,4 +76,16 @@
     [IOSToVue TellVueMsg:webView andJsStr:jsStr];
 }
 
++ (void)TellVueUserInfo:(nullable WKWebView *)webView andUserInfo:(nullable NSString *)userInfo {
+    
+    NSString *jsStr = [NSString stringWithFormat:@"LM_AndroidIOSToVue_userInfo('%@')", userInfo];
+    [IOSToVue TellVueMsg:webView andJsStr:jsStr];
+}
+
++ (void)TellVueReadAccumTime:(nullable WKWebView *)webView andReadAccumTime:(nullable NSString *)readAccumTime {
+    
+    NSString *jsStr = [NSString stringWithFormat:@"LM_AndroidIOSToVue_read_accum_time('%@')", readAccumTime];
+    [IOSToVue TellVueMsg:webView andJsStr:jsStr];
+}
+
 @end

@@ -47,6 +47,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 告诉Vue通讯录选择结果
 + (void)TellVueContactPeople:(nullable WKWebView *)webView andAddress:(nullable NSString *)name andLng:(nullable NSString *)tel;
+
+/// 告诉Vue用户信息
++ (void)TellVueUserInfo:(nullable WKWebView *)webView andUserInfo:(nullable NSString *)userInfo;
+
+/// 告诉Vue文章阅读时长
++ (void)TellVueReadAccumTime:(nullable WKWebView *)webView andReadAccumTime:(nullable NSString *)readAccumTime;
+
 @end
 
 NS_ASSUME_NONNULL_END
