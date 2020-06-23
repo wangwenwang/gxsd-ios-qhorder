@@ -316,8 +316,6 @@
         }
         else if([message.body[@"a"] isEqualToString:@"文章阅读时长"]){
             
-            
-            NSString *b = message.body[@"b"];
             [Tools setReadAccumTime:message.body[@"b"]];
         }
         else if([message.body[@"a"] isEqualToString:@"取文_章阅读时长"]){
@@ -325,6 +323,14 @@
             NSLog(@"%@", b);
             // 发送文章阅读时长
             [IOSToVue TellVueReadAccumTime:weakSelf.webView andReadAccumTime:[Tools geReadAccumTime]];
+        }
+        // 获取当前位置页面已加载，预留接口，防止js获取当前位置出问题
+        else if([message.body[@"a"] isEqualToString:@"获取当前位置页面已加载"]) {
+            
+            [[[LMGetLoc alloc] init] startLoc:^(NSString * _Nonnull address, double lng, double lat) {
+                
+                [IOSToVue TellVueCurrAddress:weakSelf.webView andAddress:address andLng:lng andLat:lat];
+            }];
         }
     }
 }

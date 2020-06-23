@@ -40,7 +40,7 @@
 
 - (void)configLocationManager {
     
-    [[BMKLocationAuth sharedInstance] checkPermisionWithKey:@"yIa27m9OpzEA0MMv7Eddl7aAUjcEGZPD" authDelegate:self];
+    [[BMKLocationAuth sharedInstance] checkPermisionWithKey:@"4jbykZazhrqFBIozwWwfIyEeFibvKe9E" authDelegate:self];
     _locationManager = [[BMKLocationManager alloc] init];
     _locationManager.delegate = self;
     _locationManager.coordinateType = BMKLocationCoordinateTypeBMK09LL;
