@@ -265,6 +265,90 @@
     NSLog(@"加载完成");
 }
 
+#pragma mark - 压缩图片
+- (UIImage *)compressImage:(UIImage *)image toByte:(NSUInteger)maxLength {
+    // Compress by quality
+    CGFloat compression = 1;
+    NSData *data = UIImageJPEGRepresentation(image, compression);
+    if (data.length < maxLength) return image;
+    
+    CGFloat max = 1;
+    CGFloat min = 0;
+    for (int i = 0; i < 6; ++i) {
+        compression = (max + min) / 2;
+        data = UIImageJPEGRepresentation(image, compression);
+        if (data.length < maxLength * 0.9) {
+            min = compression;
+        } else if (data.length > maxLength) {
+            max = compression;
+        } else {
+            break;
+        }
+    }
+    UIImage *resultImage = [UIImage imageWithData:data];
+    if (data.length < maxLength) return resultImage;
+    
+    // Compress by size
+    NSUInteger lastDataLength = 0;
+    while (data.length > maxLength && data.length != lastDataLength) {
+        lastDataLength = data.length;
+        CGFloat ratio = (CGFloat)maxLength / data.length;
+        CGSize size = CGSizeMake((NSUInteger)(resultImage.size.width * sqrtf(ratio)),
+                                 (NSUInteger)(resultImage.size.height * sqrtf(ratio))); // Use NSUInteger to prevent white blank
+        UIGraphicsBeginImageContext(size);
+        [resultImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
+        resultImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        data = UIImageJPEGRepresentation(resultImage, compression);
+    }
+    
+    return resultImage;
+}
+
+- (void)WXSendImage:(UIImage *)image withShareScene:(enum WXScene)scene {
+     if ([WXApi isWXAppInstalled] && [WXApi isWXAppSupportApi]) {
+         NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+         NSString *filePath = [documentPath stringByAppendingPathComponent:@"lm_map_curr.png"];
+         NSData *imageData = UIImageJPEGRepresentation(image, 1);
+         [imageData writeToFile:filePath atomically:NO];
+        
+//         UIImage *thumbImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, 0.5)];
+         UIImage *thumbImage = [self compressImage:image toByte:32768];
+         
+         WXImageObject *ext = [WXImageObject object];
+         // 小于10MB
+         ext.imageData = imageData;
+         
+         WXMediaMessage *message = [WXMediaMessage message];
+         message.mediaObject = ext;
+         //    message.messageExt = @"";
+         //    message.messageAction = @"";
+         //    message.mediaTagName = @"";
+        // 缩略图 小于32KB
+         [message setThumbImage:thumbImage];
+         
+         SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+         req.bText = NO;
+         req.scene = scene;
+         req.message = message;
+         [WXApi sendReq:req completion:nil];
+     }else {
+         // 提示用户安装微信
+     }
+}
+
+#pragma mark 生成image
+- (UIImage *)makeImageWithView:(UIView *)view withSize:(CGSize)size {
+    
+    // 下面方法，第一个参数表示区域大小。第二个参数表示是否是非透明的。如果需要显示半透明效果，需要传NO，否则传YES。第三个参数就是屏幕密度了，关键就是第三个参数 [UIScreen mainScreen].scale。
+    UIGraphicsBeginImageContextWithOptions(size, YES, [UIScreen mainScreen].scale);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+    
+}
+
 
 #pragma mark - WKScriptMessageHandler
 //当js 通过 注入的方法 @“messageSend” 时会调用代理回调。 原生收到的所有信息都通过此方法接收。
@@ -331,6 +415,28 @@
                 
                 [IOSToVue TellVueCurrAddress:weakSelf.webView andAddress:address andLng:lng andLat:lat];
             }];
+        }
+        // 分享成绩
+        else if([message.body[@"a"] isEqualToString:@"分享检测成绩-聊天界面"]) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                UIView *vw = weakSelf.webView;
+                
+                UIImage *im = [weakSelf makeImageWithView:vw withSize:CGSizeMake(CGRectGetWidth(vw.frame), CGRectGetHeight(vw.frame))];
+                [weakSelf WXSendImage:im withShareScene:WXSceneSession];
+            });
+        }
+        // 分享成绩
+        else if([message.body[@"a"] isEqualToString:@"分享检测成绩-朋友圈"]) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                UIView *vw = weakSelf.webView;
+                
+                UIImage *im = [weakSelf makeImageWithView:vw withSize:CGSizeMake(CGRectGetWidth(vw.frame), CGRectGetHeight(vw.frame))];
+                [weakSelf WXSendImage:im withShareScene:WXSceneTimeline];
+            });
         }
     }
 }
