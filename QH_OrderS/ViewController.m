@@ -184,7 +184,7 @@
         
 //        [_webView loadRequest:[NSURLRequest requestWithURL:fileUrl]];
         
-        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithUTF8String:"http://k56.kaidongyuan.com/CYSCMAPP/fds/#/"]] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30.0]];
+        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithUTF8String:"https://gxsd.mobi/gxsdapp"]] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30.0]];
         
 //        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithUTF8String:"http://k56.kaidongyuan.com/CYSCMAPP/fds/#/"]]]];
         
