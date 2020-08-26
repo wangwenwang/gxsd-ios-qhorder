@@ -184,7 +184,7 @@
         
 //        [_webView loadRequest:[NSURLRequest requestWithURL:fileUrl]];
         
-        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithUTF8String:"https://gxsd.mobi/gxsdapp"]] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30.0]];
+        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithUTF8String:"https://gxsd.mobi/gxsdStudentApk/gxsd-test"]] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30.0]];
         
 //        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithUTF8String:"http://k56.kaidongyuan.com/CYSCMAPP/fds/#/"]]]];
         
@@ -386,6 +386,31 @@
             [IOSToVue TellVueUserInfo:weakSelf.webView andUserInfo:[Tools getUserInfo]];
         }
         else if([message.body[@"a"] isEqualToString:@"微信登录"]){
+            
+            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//
+//                //创建多媒体消息结构体
+//                WXMediaMessage *message = [WXMediaMessage message];
+//                message.title = @"【爆款直降 盛夏特惠】【29.9免邮 限量买3免1】清新持久自然GUCCMI香水";//标题
+//                message.description = @"我在京东发现了一个不错的商品，赶快来看看吧。";//描述
+//                [message setThumbImage:[UIImage imageNamed:@"res2.png"]];//设置预览图
+//
+//                //创建网页数据对象
+//                WXWebpageObject *webObj = [WXWebpageObject object];
+//                webObj.webpageUrl = @"https://www.baidu.com/";//链接
+//                message.mediaObject = webObj;
+//
+//                SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc] init];
+//                sendReq.bText = NO;//不使用文本信息
+//                sendReq.message = message;
+//                sendReq.scene = WXSceneTimeline;//分享到好友会话
+//
+//                [WXApi sendReq:sendReq completion:nil];
+//
+//                return;
+//            });
+            
             SendAuthReq* req = [[SendAuthReq alloc] init];
             req.scope = @"snsapi_userinfo";
             req.state = @"wechat_sdk_tms";
