@@ -108,7 +108,7 @@
     
     NSString *params = [NSString stringWithFormat:@"{\"wxOpenid\":\"%@\",\"APPLOGIN\":\"T\"}", openid];
     NSString *paramsEncoding = [params stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *url = [NSString stringWithFormat:@"http://139.9.180.214:9000/rest/apigateway/user/login?params=%@", paramsEncoding];
+    NSString *url = [NSString stringWithFormat:@"https://www.gxsd.mobi/gxsd-test/read/readUser/login?openId=%@&accountType=1", openid];
     NSLog(@"请求APP用户信息参数：%@",url);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -121,7 +121,7 @@
         id data = result[@"data"];
         NSString *message = result[@"message"];
 
-        if(code == 0) {
+        if(code == 200) {
 
             NSString *params = [data toString];
             NSString *_params = [params stringByReplacingOccurrencesOfString:@"\n"withString:@""];
@@ -136,13 +136,10 @@
             [IOSToVue TellVueWXBind_YES_Ajax:weakSelf.webView andParamsEncoding:__params];
             
             NSLog(@"请求APP用户信息成功");
-        } else if(code == -1 || code == 1){
+        } else{
             
             [IOSToVue TellVueWXBind_NO_Ajax:_webView andOpenid:openid];
             NSLog(@"此微信未注册");
-        }else {
-
-            NSLog(@"%@", message);
         }
         NSLog(@"%@", result);
 
