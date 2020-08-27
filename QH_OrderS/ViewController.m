@@ -87,13 +87,41 @@
     [imageV setFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     [self.view addSubview:imageV];
     
-    [UIView animateWithDuration:0.8 delay:0.8 options:0 animations:^{
+    
+//    [UIView animateWithDuration:0 delay:6 options:0 animations:^{
+//        
+//    } completion:^(BOOL finished) {
+//        
+//        [prompt removeFromSuperview];
+//    }];
+    
+    [UIView animateWithDuration:0.8 delay:1.2 options:0 animations:^{
         
         [imageV setAlpha:0];
     } completion:^(BOOL finished) {
         
         [imageV removeFromSuperview];
     }];
+    
+    UILabel *prompt = [[UILabel alloc] init];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        sleep(2);
+        dispatch_async(dispatch_get_main_queue(), ^{
+
+            [prompt setFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+            prompt.text = @"程序启动中...";
+            prompt.textAlignment = NSTextAlignmentCenter;
+            [self.view addSubview:prompt];
+        });
+    });
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        sleep(5);
+        dispatch_async(dispatch_get_main_queue(), ^{
+
+            [prompt removeFromSuperview];
+        });
+    });
 }
 
 
