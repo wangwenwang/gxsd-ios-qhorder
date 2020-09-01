@@ -416,36 +416,44 @@
         }
         else if([message.body[@"a"] isEqualToString:@"微信登录"]){
             
-            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//
-//                //创建多媒体消息结构体
-//                WXMediaMessage *message = [WXMediaMessage message];
-//                message.title = @"【爆款直降 盛夏特惠】【29.9免邮 限量买3免1】清新持久自然GUCCMI香水";//标题
-//                message.description = @"我在京东发现了一个不错的商品，赶快来看看吧。";//描述
-//                [message setThumbImage:[UIImage imageNamed:@"res2.png"]];//设置预览图
-//
-//                //创建网页数据对象
-//                WXWebpageObject *webObj = [WXWebpageObject object];
-//                webObj.webpageUrl = @"https://www.baidu.com/";//链接
-//                message.mediaObject = webObj;
-//
-//                SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc] init];
-//                sendReq.bText = NO;//不使用文本信息
-//                sendReq.message = message;
-//                sendReq.scene = WXSceneTimeline;//分享到好友会话
-//
-//                [WXApi sendReq:sendReq completion:nil];
-//
-//                return;
-//            });
-            
             SendAuthReq* req = [[SendAuthReq alloc] init];
             req.scope = @"snsapi_userinfo";
             req.state = @"wechat_sdk_tms";
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [WXApi sendReq:req completion:nil];
+            });
+        }
+        else if([message.body[@"a"] isEqualToString:@"邀请加入班级"]){
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                if([WXApi isWXAppInstalled]){//判断当前设备是否安装微信客户端
+
+                    //创建多媒体消息结构体
+                    WXMediaMessage *urlMessage = [WXMediaMessage message];
+                    urlMessage.title = message.body[@"c"];//标题
+                    urlMessage.description = message.body[@"d"];//描述
+                    [urlMessage setThumbImage:[UIImage imageNamed:@"share_icon"]];//设置预览图
+
+                    //创建网页数据对象
+                    WXWebpageObject *webObj = [WXWebpageObject object];
+                    webObj.webpageUrl = message.body[@"b"];//链接
+                    urlMessage.mediaObject = webObj;
+
+                    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc] init];
+                    sendReq.bText = NO;//不使用文本信息
+                    sendReq.message = urlMessage;
+                    sendReq.scene = WXSceneSession;//分享到好友会话
+
+                    [WXApi sendReq:sendReq completion:^(BOOL success) {
+                       NSLog(@"发起分享:%@", success ? @"成功" : @"失败");
+                    }];
+                }else{
+
+                    //提示：未安装微信应用或版本过低
+                    [Tools showAlert:self.view andTitle:@"未安装微信应用或版本过低"];
+                }
             });
         }
         else if([message.body[@"a"] isEqualToString:@"用户信息"]){
