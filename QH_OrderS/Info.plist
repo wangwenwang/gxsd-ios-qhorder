@@ -51,15 +51,15 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>APP需要您的同意才能使用相机，用于拍照用于上传头像</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>APP将获取您的位置，用来选择周边的学校</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>APP将获取您的位置，用来选择周边的学校</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>APP需要您的同意才能读取媒体资料库，用于上传头像</string>
-	<key>NSCameraUsageDescription</key>
-	<string>APP需要您的同意才能使用相机，用于拍照用于上传头像</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>APP需要您的同意才能读取媒体资料库，用于上传头像</string>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string>APP需要您的同意才能读取媒体资料库，用于上传头像</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
