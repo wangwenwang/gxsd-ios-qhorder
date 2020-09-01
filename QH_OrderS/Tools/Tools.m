@@ -235,4 +235,44 @@
     return result;
 }
 
++ (nullable NSString *)get_web_url{
+    if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios"]){
+        return k_web_url_student;
+    }else if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios-teacher"]){
+        return k_web_url_teacher;
+    }else{
+        return @"https://www.baidu.com";
+    }
+}
+
++ (nullable NSString *)get_WXAPPID{
+    if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios"]){
+        return WXAPPID_student;
+    }else if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios-teacher"]){
+        return WXAPPID_teacher;
+    }else{
+        return WXAPPID_student;
+    }
+}
+
++ (nullable NSString *)get_WXAPPSECRED{
+    if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios"]){
+        return WXAPPSECRED_student;
+    }else if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios-teacher"]){
+        return WXAPPSECRED_teacher;
+    }else{
+        return WXAPPSECRED_student;
+    }
+}
+
++ (nullable NSString *)get_role{
+    if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios"]){
+        return @"1";
+    }else if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios-teacher"]){
+        return @"2";
+    }else{
+        return @"1";
+    }
+}
+
 @end

@@ -65,7 +65,7 @@
     [_window makeKeyAndVisible];
     
     // 注册微信凭证
-    BOOL b = [WXApi registerApp:WXAPPID universalLink:@"https://tms.kaidongyuan.com"];
+    BOOL b = [WXApi registerApp:[Tools get_WXAPPID] universalLink:@"https://tms.kaidongyuan.com"];
     
     if(b) { NSLog(@"微信注册--成功");}
     else  { NSLog(@"微信注册--失败");}
@@ -108,7 +108,7 @@
     
     NSString *params = [NSString stringWithFormat:@"{\"wxOpenid\":\"%@\",\"APPLOGIN\":\"T\"}", openid];
     NSString *paramsEncoding = [params stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *url = [NSString stringWithFormat:@"https://www.gxsd.mobi/gxsd-test/read/readUser/login?openId=%@&accountType=1", openid];
+    NSString *url = [NSString stringWithFormat:@"https://www.gxsd.mobi/gxsd-test/read/readUser/login?openId=%@&accountType=%@", openid, [Tools get_role]];
     NSLog(@"请求APP用户信息参数：%@",url);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -166,8 +166,8 @@
         }else {
             
             NSString *code = rep.code;
-            NSString *appid = WXAPPID;
-            NSString *appsecret = WXAPPSECRED;
+            NSString *appid = [Tools get_WXAPPID];
+            NSString *appsecret = [Tools get_WXAPPSECRED];
             NSString *url = [NSString stringWithFormat:@"https://api.weixin.qq.com/sns/oauth2/access_token?appid=%@&secret=%@&code=%@&grant_type=authorization_code", appid, appsecret, code];
             
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];

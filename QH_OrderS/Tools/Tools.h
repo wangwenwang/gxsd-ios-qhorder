@@ -148,4 +148,20 @@
  */
 + (nullable NSString *)OneDecimal:(nullable NSString *)str;
 
+
+/// 获取web链接
++ (nullable NSString *)get_web_url;
+
+
+/// 获取微信AppId
++ (nullable NSString *)get_WXAPPID;
+
+
+/// 获取微信AppSecred
++ (nullable NSString *)get_WXAPPSECRED;
+
+
+/// 获取用户角色，1老师/2学生
++ (nullable NSString *)get_role;
+
 @end

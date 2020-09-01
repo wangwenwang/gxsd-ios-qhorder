@@ -72,7 +72,7 @@
 		3B04E19522DD9DE9005840FC /* XHVersionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHVersionRequest.m; sourceTree = "<group>"; };
 		3B04E19622DD9DE9005840FC /* XHVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHVersion.h; sourceTree = "<group>"; };
 		3B04E19722DD9DE9005840FC /* XHAppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHAppInfo.h; sourceTree = "<group>"; };
-		3B297DB922DD6D750028847C /* 高效速读.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "高效速读.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B297DB922DD6D750028847C /* 高效速读老师.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "高效速读老师.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B297DBC22DD6D750028847C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3B297DBD22DD6D750028847C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3B297DBF22DD6D750028847C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -207,7 +207,7 @@
 		3B297DBA22DD6D750028847C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3B297DB922DD6D750028847C /* 高效速读.app */,
+				3B297DB922DD6D750028847C /* 高效速读老师.app */,
 				3B297DD122DD6D760028847C /* QH_OrderSTests.xctest */,
 				3B297DDC22DD6D760028847C /* QH_OrderSUITests.xctest */,
 			);
@@ -413,7 +413,7 @@
 			);
 			name = QH_OrderS;
 			productName = QH_OrderS;
-			productReference = 3B297DB922DD6D750028847C /* 高效速读.app */;
+			productReference = 3B297DB922DD6D750028847C /* 高效速读老师.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3B297DD022DD6D760028847C /* QH_OrderSTests */ = {
@@ -772,7 +772,7 @@
 				CODE_SIGN_ENTITLEMENTS = "QH_OrderS/高效速读.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FXUDZ5557V;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -793,9 +793,9 @@
 					"$(PROJECT_DIR)/QH_OrderS/Third/XYSDK",
 					"$(PROJECT_DIR)",
 				);
-				MARKETING_VERSION = 1.0.7;
-				PRODUCT_BUNDLE_IDENTIFIER = "mobi.gxsd.gxsd-ios";
-				PRODUCT_NAME = "高效速读";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "mobi.gxsd.gxsd-ios-teacher";
+				PRODUCT_NAME = "高效速读老师";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -809,7 +809,7 @@
 				CODE_SIGN_ENTITLEMENTS = "QH_OrderS/高效速读.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FXUDZ5557V;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -830,9 +830,9 @@
 					"$(PROJECT_DIR)/QH_OrderS/Third/XYSDK",
 					"$(PROJECT_DIR)",
 				);
-				MARKETING_VERSION = 1.0.7;
-				PRODUCT_BUNDLE_IDENTIFIER = "mobi.gxsd.gxsd-ios";
-				PRODUCT_NAME = "高效速读";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "mobi.gxsd.gxsd-ios-teacher";
+				PRODUCT_NAME = "高效速读老师";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

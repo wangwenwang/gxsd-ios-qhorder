@@ -93,12 +93,19 @@
 #define SafeAreaBottomHeight (ScreenHeight == 812.0 ? 34 : 0)
 
 
+// web链接
+#define k_web_url_student @"https://gxsd.mobi/gxsdStudentApk/gxsd-test"
+#define k_web_url_teacher @"https://gxsd.mobi/gxsdTeacherApk/gxsd-test"
+
+
 // 微信AppID
-#define WXAPPID @"wx2b41f56e818f1e1c"
+#define WXAPPID_student @"wx2b41f56e818f1e1c"
+#define WXAPPID_teacher @"wxdce29e3a76e0c723"
 
 
 // 微信AppSecret
-#define WXAPPSECRED @"65ad80aa8111fee81358590e8783e7d1"
+#define WXAPPSECRED_student @"65ad80aa8111fee81358590e8783e7d1"
+#define WXAPPSECRED_teacher @"63f13ceaad54fe8ee638dc08052ba5b6"
 
 
 // 反地理编码函数，把位置告诉Vue
