@@ -24,6 +24,12 @@
 /// 存储用户信息
 + (void)setUserInfo:(nullable NSString *)userInfo;
 
+/// 获取习惯信息
++ (nullable NSString *)getHabbitInfo;
+
+/// 存储习惯信息
++ (void)setHabbitInfo:(nullable NSString *)userInfo;
+
 /// 获取zip版本号
 + (nullable NSString *)getZipVersion;
 

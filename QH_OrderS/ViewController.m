@@ -413,6 +413,9 @@
             
             // 发送用户信息
             [IOSToVue TellVueUserInfo:weakSelf.webView andUserInfo:[Tools getUserInfo]];
+            
+            // 发送用户习惯
+            [IOSToVue TellVueHabbitInfo:weakSelf.webView andHabbitInfo:[Tools getHabbitInfo]];
         }
         else if([message.body[@"a"] isEqualToString:@"微信登录"]){
             
@@ -459,6 +462,10 @@
         else if([message.body[@"a"] isEqualToString:@"用户信息"]){
             
             [Tools setUserInfo:message.body[@"b"]];
+        }
+        else if([message.body[@"a"] isEqualToString:@"用户习惯"]){
+            
+            [Tools setHabbitInfo:message.body[@"b"]];
         }
         else if([message.body[@"a"] isEqualToString:@"文章阅读时长"]){
             

@@ -40,6 +40,18 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
++ (nullable NSString *)getHabbitInfo {
+    
+    NSString *st = [[NSUserDefaults standardUserDefaults] stringForKey:kUserDefaults_HabbitInfo_local_key];
+    return [[NSUserDefaults standardUserDefaults] stringForKey:kUserDefaults_HabbitInfo_local_key];
+}
+
++ (void)setHabbitInfo:(nullable NSString *)habbitInfo {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:habbitInfo forKey:kUserDefaults_HabbitInfo_local_key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 + (nullable NSString *)getZipVersion {
     
     return [[NSUserDefaults standardUserDefaults] stringForKey:kUserDefaults_ZipVersion_local_key];

@@ -82,6 +82,12 @@
     [IOSToVue TellVueMsg:webView andJsStr:jsStr];
 }
 
++ (void)TellVueHabbitInfo:(nullable WKWebView *)webView andHabbitInfo:(nullable NSString *)habbitInfo {
+    
+    NSString *jsStr = [NSString stringWithFormat:@"LM_AndroidIOSToVue_userHabbit('%@')", habbitInfo];
+    [IOSToVue TellVueMsg:webView andJsStr:jsStr];
+}
+
 + (void)TellVueReadAccumTime:(nullable WKWebView *)webView andReadAccumTime:(nullable NSString *)readAccumTime {
     
     NSString *jsStr = [NSString stringWithFormat:@"LM_AndroidIOSToVue_read_accum_time('%@')", readAccumTime];

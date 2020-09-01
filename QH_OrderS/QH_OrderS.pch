@@ -38,6 +38,8 @@
 
 // 用户信息
 #define kUserDefaults_UserInfo_local_key @"UserInfo"
+// 用户习惯
+#define kUserDefaults_HabbitInfo_local_key @"HabbitInfo"
 
 // 文章阅读时长
 #define kUserDefaults_ReadAccumTime_local_key @"ReadAccumTime"
