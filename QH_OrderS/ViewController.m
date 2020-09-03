@@ -116,7 +116,7 @@
     });
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        sleep(5);
+        sleep(10);
         dispatch_async(dispatch_get_main_queue(), ^{
 
             [prompt removeFromSuperview];
