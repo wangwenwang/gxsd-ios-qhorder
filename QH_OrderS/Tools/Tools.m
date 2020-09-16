@@ -247,11 +247,11 @@
     return result;
 }
 
-+ (nullable NSString *)get_web_url{
++ (nullable NSString *)get_update_url{
     if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios"]){
-        return k_web_url_student;
+        return k_update_url_student;
     }else if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios-teacher"]){
-        return k_web_url_teacher;
+        return k_update_url_teacher;
     }else{
         return @"https://www.baidu.com";
     }

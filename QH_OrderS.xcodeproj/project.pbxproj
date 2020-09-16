@@ -36,11 +36,11 @@
 		3B79284F22F432AF009FCAF8 /* LMGetLoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284922F432AF009FCAF8 /* LMGetLoc.m */; };
 		3B79285022F432AF009FCAF8 /* IOSToVue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284A22F432AF009FCAF8 /* IOSToVue.m */; };
 		3B79285122F432AF009FCAF8 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284B22F432AF009FCAF8 /* Tools.m */; };
+		3BA387B725113244004D5766 /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3BA387B625113244004D5766 /* dist.zip */; };
 		3BD20FA4230A9E73001A52A4 /* ServiceTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD20FA2230A9E73001A52A4 /* ServiceTools.m */; };
 		3BD20FAC230AC9CE001A52A4 /* BMKLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD20FAB230AC9CE001A52A4 /* BMKLocationKit.framework */; };
 		3BE88EA3232169FD008AC8E7 /* LocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE88EA0232169FD008AC8E7 /* LocationModel.m */; };
 		3BE88EA4232169FD008AC8E7 /* RouteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE88EA1232169FD008AC8E7 /* RouteAnnotation.m */; };
-		3BF928E024A1A75A0072AE45 /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3BF928DF24A1A75A0072AE45 /* dist.zip */; };
 		9CFB11A5FB77436ED36CDE93 /* libPods-QH_OrderS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DA69FEE1BB9777B55ADB628 /* libPods-QH_OrderS.a */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +118,7 @@
 		3B79284C22F432AF009FCAF8 /* IOSToVue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOSToVue.h; sourceTree = "<group>"; };
 		3B79284D22F432AF009FCAF8 /* LMGetLoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMGetLoc.h; sourceTree = "<group>"; };
 		3B79284E22F432AF009FCAF8 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		3BA387B625113244004D5766 /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
 		3BBB5D3D2466620D002FE6A3 /* 高效速读.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "高效速读.entitlements"; sourceTree = "<group>"; };
 		3BBF8B66233B616F0070A8ED /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		3BD20FA2230A9E73001A52A4 /* ServiceTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceTools.m; sourceTree = "<group>"; };
@@ -127,7 +128,6 @@
 		3BE88EA0232169FD008AC8E7 /* LocationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationModel.m; sourceTree = "<group>"; };
 		3BE88EA1232169FD008AC8E7 /* RouteAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteAnnotation.m; sourceTree = "<group>"; };
 		3BE88EA2232169FD008AC8E7 /* LocationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationModel.h; sourceTree = "<group>"; };
-		3BF928DF24A1A75A0072AE45 /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
 		7DA69FEE1BB9777B55ADB628 /* libPods-QH_OrderS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QH_OrderS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9891314D5E289145FAAB882 /* Pods-QH_OrderS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QH_OrderS.release.xcconfig"; path = "Pods/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -218,8 +218,8 @@
 			isa = PBXGroup;
 			children = (
 				3BBB5D3D2466620D002FE6A3 /* 高效速读.entitlements */,
-				3BF928DF24A1A75A0072AE45 /* dist.zip */,
 				3B04E18522DD757F005840FC /* Default-568@2x.png */,
+				3BA387B625113244004D5766 /* dist.zip */,
 				3BE88E9E232169FD008AC8E7 /* Custum */,
 				3B2CFB7F231D3E9F0039C483 /* Category */,
 				3BD20FA1230A9E73001A52A4 /* Service */,
@@ -515,7 +515,7 @@
 				3B435695233DFE0400D38552 /* YBShowLocationVC.xib in Resources */,
 				3B435693233DFE0400D38552 /* YBCurrentLocationCell.xib in Resources */,
 				3B435691233DFE0400D38552 /* YBNeighborLocationCell.xib in Resources */,
-				3BF928E024A1A75A0072AE45 /* dist.zip in Resources */,
+				3BA387B725113244004D5766 /* dist.zip in Resources */,
 				3B04E18622DD757F005840FC /* Default-568@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

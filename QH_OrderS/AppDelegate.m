@@ -71,7 +71,7 @@
     else  { NSLog(@"微信注册--失败");}
     
     // 检查HTML zip 是否有更新
-//    [self checkZipVersion];
+    [self checkZipVersion];
     
 //    // [ GTSDK ]：使用APPID/APPKEY/APPSECRENT创建个推实例
 //    [GeTuiSdk startSdkWithAppId:kGtAppId appKey:kGtAppKey appSecret:kGtAppSecret delegate:self];

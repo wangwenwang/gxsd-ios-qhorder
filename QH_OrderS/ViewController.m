@@ -102,26 +102,6 @@
         
         [imageV removeFromSuperview];
     }];
-    
-    UILabel *prompt = [[UILabel alloc] init];
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        sleep(2);
-        dispatch_async(dispatch_get_main_queue(), ^{
-
-            [prompt setFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
-            prompt.text = @"程序启动中...";
-            prompt.textAlignment = NSTextAlignmentCenter;
-            [self.view addSubview:prompt];
-        });
-    });
-    
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        sleep(10);
-        dispatch_async(dispatch_get_main_queue(), ^{
-
-            [prompt removeFromSuperview];
-        });
-    });
 }
 
 
@@ -192,17 +172,17 @@
         
         //        if ([fileManager fileExistsAtPath:checkFilePath] && [[Tools getLastVersion] isEqualToString:[Tools getCFBundleShortVersionString]]) {
         // 原生更新时，为了提高用户体验，不解压本地dist.zip，因为解压后很可能会触发vue更新（vue已经更新到0.0.9，原生里才0.0.7）
-//        if ([fileManager fileExistsAtPath:checkFilePath]) {
-//
-//            NSLog(@"HTML已存在，无需解压");
-//        } else {
+        if ([fileManager fileExistsAtPath:checkFilePath]) {
+
+            NSLog(@"HTML已存在，无需解压");
+        } else {
             
             NSLog(@"第一次加载，或版本有更新，解压");
             NSString *zipPath = [[NSBundle mainBundle] pathForResource:@"dist" ofType:@"zip"];
             NSLog(@"zipPath:%@", zipPath);
             [SSZipArchive unzipFileAtPath:zipPath toDestination:unzipPath];
             [Tools setZipVersion:kUserDefaults_ZipVersion_local_defaultValue];
-//        }
+        }
         [Tools setLastVersion];
         
         // 加载URL
@@ -210,9 +190,9 @@
         NSURL *baseUrl = [NSURL fileURLWithPath:basePath];
         NSURL *fileUrl = [self fileURLForBuggyWKWebView8WithFileURL:baseUrl];
         
-//        [_webView loadRequest:[NSURLRequest requestWithURL:fileUrl]];
+        [_webView loadRequest:[NSURLRequest requestWithURL:fileUrl]];
         
-        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[Tools get_web_url]] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30.0]];
+//        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[Tools get_web_url]] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30.0]];
         
         
 //        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithUTF8String:"http://k56.kaidongyuan.com/CYSCMAPP/fds/#/"]]]];
@@ -427,7 +407,7 @@
                 [WXApi sendReq:req completion:nil];
             });
         }
-        else if([message.body[@"a"] isEqualToString:@"邀请加入班级"]){
+        else if([message.body[@"a"] isEqualToString:@"邀请加入班级"] || [message.body[@"a"] isEqualToString:@"分享链接"]){
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
@@ -506,6 +486,18 @@
                 UIImage *im = [weakSelf makeImageWithView:vw withSize:CGSizeMake(CGRectGetWidth(vw.frame), CGRectGetHeight(vw.frame))];
                 [weakSelf WXSendImage:im withShareScene:WXSceneTimeline];
             });
+        }
+        // 检查更新
+        else if([message.body[@"a"] isEqualToString:@"检查APP和VUE版本更新"]) {
+            
+            // 检查zip更新
+            dispatch_async(dispatch_get_main_queue(), ^{
+
+                [self checkZipVersion:YES];
+            });
+            
+            // 检查AppStore更新
+            [XHVersion checkNewVersion];
         }
     }
 }

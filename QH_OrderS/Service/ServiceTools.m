@@ -79,81 +79,66 @@
 
 - (void)queryAppVersion:(BOOL)showPrompt {
     
-    return;
-    
     WeakSelf;
     
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    NSString *url = [Tools get_update_url];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", @"text/plain", nil];
+    NSString *params = @"{\"tenantCode\":\"KDY\"}";
+    NSDictionary *parameters = @{@"params" : params};
+    NSLog(@"接口:%@|zip检测参数：%@", url, parameters);
+    
+    [manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        nil;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        while (1) {
+        NSLog(@"请求成功---%@", responseObject);
+        int code = [responseObject[@"code"] intValue];
+        NSString *Msg = responseObject[@"Msg"];
+        if(code == 200) {
             
-            if([Tools getServerAddress]) {
+            NSDictionary *dict = responseObject[@"data"][0];
+            NSString *server_zipVersion = dict[@"vueVersion"];
+            NSString *currZipVersion = [Tools getZipVersion];
+            int c = [Tools compareVersion:server_zipVersion andLocati:currZipVersion];
+            if(c == 1) {
                 
-                NSString *url = [NSString stringWithFormat:@"%@%@", [Tools getServerAddress], @"queryAppVersion1.do"];
-                AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-                manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", @"text/plain", nil];
-                NSString *params = @"{\"tenantCode\":\"KDY\"}";
-                NSDictionary *parameters = @{@"params" : params};
-                NSLog(@"接口:%@|zip检测参数：%@", url, parameters);
-                
-                [manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
-                    nil;
-                } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                // 设置 webView 为 nil，解决WKWebview调用reload导致JSContext失效的问题
+                UIViewController *rootViewController = [Tools getRootViewController];
+                if([rootViewController isKindOfClass:[ViewController class]]) {
                     
-                    NSLog(@"请求成功---%@", responseObject);
-                    int status = [responseObject[@"status"] intValue];
-                    NSString *Msg = responseObject[@"Msg"];
-                    if(status == 1) {
-                        
-                        NSDictionary *dict = responseObject[@"data"];
-                        NSString *server_zipVersion = dict[@"zipVersionNo"];
-                        NSString *currZipVersion = [Tools getZipVersion];
-                        int c = [Tools compareVersion:server_zipVersion andLocati:currZipVersion];
-                        if(c == 1) {
-                        
-                            // 设置 webView 为 nil，解决WKWebview调用reload导致JSContext失效的问题
-                            UIViewController *rootViewController = [Tools getRootViewController];
-                            if([rootViewController isKindOfClass:[ViewController class]]) {
-                                
-                                ViewController *vc = (ViewController *)rootViewController;
-                                [vc.webView removeFromSuperview];
-                                vc.webView = nil;
-                            }
-                            NSString *server_zipDownloadUrl = dict[@"zipDownloadUrl"];
-                            NSLog(@"更新zip...");
-                            
-                            if([weakSelf.delegate respondsToSelector:@selector(downloadStart)]) {
-                                [weakSelf.delegate downloadStart];
-                            }
-                            [self downZip:server_zipDownloadUrl andVersion:server_zipVersion];
-                        }else{
-                            
-                            if(showPrompt){
-
-                                [Tools showAlert:((AppDelegate*)([UIApplication sharedApplication].delegate)).window andTitle:@"已经是最新版本"];
-                            }
-                        }
-                    }else {
-                        if([weakSelf.delegate respondsToSelector:@selector(failureOfLogin:)]) {
-                            [weakSelf.delegate failureOfLogin:Msg];
-                        }
-                    }
-                    
-                } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                    NSLog(@"请求失败---%@", error);
-                    if([weakSelf.delegate respondsToSelector:@selector(failureOfLogin:)]) {
-                        
-                        [weakSelf.delegate failureOfLogin:@"请求失败"];
-                    }
-                }];
-                break;
-            }else {
+                    ViewController *vc = (ViewController *)rootViewController;
+                    [vc.webView removeFromSuperview];
+                    vc.webView = nil;
+                }
+                NSString *server_zipDownloadUrl = dict[@"vueDownloadUrl"];
+                NSLog(@"更新zip...");
                 
-                NSLog(@"服务器地址为空，延迟1秒访问zip版本接口");
-                sleep(1);
+                if([weakSelf.delegate respondsToSelector:@selector(downloadStart)]) {
+                    [weakSelf.delegate downloadStart];
+                }
+                [self downZip:server_zipDownloadUrl andVersion:server_zipVersion];
+            }else{
+                
+                if(showPrompt){
+                    
+                    [Tools showAlert:((AppDelegate*)([UIApplication sharedApplication].delegate)).window andTitle:@"已经是最新版本"];
+                }
+            }
+        }else {
+            if([weakSelf.delegate respondsToSelector:@selector(failureOfLogin:)]) {
+                [weakSelf.delegate failureOfLogin:Msg];
             }
         }
-    });
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败---%@", error);
+        if([weakSelf.delegate respondsToSelector:@selector(failureOfLogin:)]) {
+            
+            [weakSelf.delegate failureOfLogin:@"请求失败"];
+        }
+    }];
+    
 }
 
 @end

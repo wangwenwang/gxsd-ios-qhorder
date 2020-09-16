@@ -155,8 +155,8 @@
 + (nullable NSString *)OneDecimal:(nullable NSString *)str;
 
 
-/// 获取web链接
-+ (nullable NSString *)get_web_url;
+/// 获取版本更新链接
++ (nullable NSString *)get_update_url;
 
 
 /// 获取微信AppId
