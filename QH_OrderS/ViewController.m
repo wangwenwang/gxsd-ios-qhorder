@@ -363,7 +363,11 @@
 //当js 通过 注入的方法 @“messageSend” 时会调用代理回调。 原生收到的所有信息都通过此方法接收。
 -(void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
     
-    NSLog(@"原生收到了js发送过来的消息 message.body = %@",message.body);
+    NSLog(@"原生收到了js发送过来的消息 message.body = %@",message.body);NSLog(@"%s", __FUNCTION__);
+    
+    // 禁用选中效果
+    [self.webView evaluateJavaScript:@"document.documentElement.style.webkitUserSelect='none'" completionHandler:nil];
+    [self.webView evaluateJavaScript:@"document.documentElement.style.webkitTouchCallout='none'" completionHandler:nil];
     
     __weak __typeof(self)weakSelf = self;
     
