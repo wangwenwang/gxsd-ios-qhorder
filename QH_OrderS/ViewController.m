@@ -400,9 +400,6 @@
             
             // 发送用户习惯
             [IOSToVue TellVueHabbitInfo:weakSelf.webView andHabbitInfo:[Tools getHabbitInfo]];
-            
-            // 检查AppStore更新
-            [XHVersion checkNewVersion];
         }
         else if([message.body[@"a"] isEqualToString:@"微信登录"]){
             
@@ -455,6 +452,9 @@
                 
                 [self checkZipVersion:NO];
             });
+            
+            // 检查AppStore更新
+            [XHVersion checkNewVersion];
         }
         else if([message.body[@"a"] isEqualToString:@"用户习惯"]){
             
