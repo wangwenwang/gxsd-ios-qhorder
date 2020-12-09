@@ -101,12 +101,12 @@
 
 
 // 微信AppID
-#define WXAPPID_student @"wx2b41f56e818f1e1c"
+#define WXAPPID_student @"wxdce29e3a76e0c723"
 #define WXAPPID_teacher @"wxe6d00f631717f3c1"
 
 
 // 微信AppSecret
-#define WXAPPSECRED_student @"65ad80aa8111fee81358590e8783e7d1"
+#define WXAPPSECRED_student @"65bdac5dee3677bb8150b22a87abece7"
 #define WXAPPSECRED_teacher @"63f13ceaad54fe8ee638dc08052ba5b6"
 
 
