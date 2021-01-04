@@ -29,6 +29,8 @@
 #import <LMProgressView.h>
 #import "ServiceTools.h"
 
+#import "ISEViewController.h"
+
 @interface ViewController ()<UIGestureRecognizerDelegate, ABPeoplePickerNavigationControllerDelegate, CNContactPickerDelegate, ServiceToolsDelegate, WKUIDelegate, WKScriptMessageHandler>
 
 @property (strong, nonatomic) AppDelegate *app;
@@ -511,6 +513,19 @@
             
             // 检查AppStore更新
             [XHVersion checkNewVersion];
+        }
+        // 录音
+        else if([message.body[@"a"] isEqualToString:@"录音"]) {
+            
+            WKWebView *webView = weakSelf.webView;
+            // 录音
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSString *b = message.body[@"b"];
+                ISEViewController *vc = [[ISEViewController alloc] init];
+                vc.read_content = b;
+                vc.webView = webView;
+                [self presentViewController:vc animated:YES completion:^{ }];
+            });
         }
     }
 }

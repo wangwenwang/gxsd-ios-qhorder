@@ -29,6 +29,8 @@
 #define kGtAppKey @"Z4iGcM5qR07sixGQ6T3ZU3"
 #define kGtAppSecret @"n59KfCTM428EqYL7RuN8Y4"
 
+#import <IFlyMSC/IFlyMSC.h>
+
 @interface AppDelegate ()<ServiceToolsDelegate, WXApiDelegate>
 
 @property (strong, nonatomic) WKWebView *webView;
@@ -83,6 +85,12 @@
 //    [self voipRegistration];
     
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    
+    
+    //Set APPID
+    NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@", @"5f9a1b08"];
+    //Configure and initialize iflytek services.(This interface must been invoked in application:didFinishLaunchingWithOptions:)
+    [IFlySpeechUtility createUtility:initString];
     
     return YES;
 }

@@ -57,6 +57,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 告诉Vue文章阅读时长
 + (void)TellVueReadAccumTime:(nullable WKWebView *)webView andReadAccumTime:(nullable NSString *)readAccumTime;
 
+/// 告诉Vue科大讯飞语音评测返回值xml和上传服务器的音频地址
++ (void)TellVueReadGswXml:(nullable WKWebView *)webView andXml:(nullable NSString *)xml andMp3Path:(nullable NSString *)path;
+
 @end
 
 NS_ASSUME_NONNULL_END

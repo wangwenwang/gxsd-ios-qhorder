@@ -78,5 +78,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>APP需要您的同意才能使用录音功能，用于学生朗读文章</string>
+	<key>NSLocationUsageDescription</key>
+	<string>APP需要您的同意才能使用录音功能，用于学生朗读文章</string>
+	<key>NSContactsUsageDescription</key>
+	<string>APP需要您的同意才能使用录音功能，用于学生朗读文章</string>
 </dict>
 </plist>

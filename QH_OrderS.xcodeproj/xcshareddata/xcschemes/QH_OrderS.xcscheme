@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3B297DB822DD6D750028847C"
-               BuildableName = "&#x9ad8;&#x6548;&#x901f;&#x8bfb;&#x8001;&#x5e08;.app"
+               BuildableName = "&#x9ad8;&#x6548;&#x901f;&#x8bfb;.app"
                BlueprintName = "QH_OrderS"
                ReferencedContainer = "container:QH_OrderS.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3B297DB822DD6D750028847C"
-            BuildableName = "&#x9ad8;&#x6548;&#x901f;&#x8bfb;&#x8001;&#x5e08;.app"
+            BuildableName = "&#x9ad8;&#x6548;&#x901f;&#x8bfb;.app"
             BlueprintName = "QH_OrderS"
             ReferencedContainer = "container:QH_OrderS.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3B297DB822DD6D750028847C"
-            BuildableName = "&#x9ad8;&#x6548;&#x901f;&#x8bfb;&#x8001;&#x5e08;.app"
+            BuildableName = "&#x9ad8;&#x6548;&#x901f;&#x8bfb;.app"
             BlueprintName = "QH_OrderS"
             ReferencedContainer = "container:QH_OrderS.xcodeproj">
          </BuildableReference>

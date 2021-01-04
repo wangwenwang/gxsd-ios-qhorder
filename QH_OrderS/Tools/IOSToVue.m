@@ -12,7 +12,7 @@
 
 + (void)TellVueMsg:(nullable WKWebView *)webView andJsStr:(nullable NSString *)jsStr {
     
-    NSLog(@"%@", jsStr);
+//    NSLog(@"%@", jsStr);
     dispatch_async(dispatch_get_main_queue(), ^{
         [webView evaluateJavaScript:jsStr completionHandler:^(id _Nullable resp, NSError * _Nullable error) {
             NSLog(@"error = %@ , response = %@",error, resp);
@@ -91,6 +91,12 @@
 + (void)TellVueReadAccumTime:(nullable WKWebView *)webView andReadAccumTime:(nullable NSString *)readAccumTime {
     
     NSString *jsStr = [NSString stringWithFormat:@"LM_AndroidIOSToVue_read_accum_time('%@')", readAccumTime];
+    [IOSToVue TellVueMsg:webView andJsStr:jsStr];
+}
+
++ (void)TellVueReadGswXml:(nullable WKWebView *)webView andXml:(nullable NSString *)xml andMp3Path:(nullable NSString *)path {
+    
+    NSString *jsStr = [NSString stringWithFormat:@"LM_AndroidIOSToVue_read_gsw_xml_result('%@','%@')", xml, path];
     [IOSToVue TellVueMsg:webView andJsStr:jsStr];
 }
 
