@@ -28,16 +28,37 @@
 
 #import <LMProgressView.h>
 #import "ServiceTools.h"
+#import <MBProgressHUD.h>
 
-#import "ISEViewController.h"
+#import "ISEParams.h"
+#import "IFlyMSC/IFlyMSC.h"
+#import "ISEResult.h"
+#import "ISEResultXmlParser.h"
+#import "lame.h"
 
-@interface ViewController ()<UIGestureRecognizerDelegate, ABPeoplePickerNavigationControllerDelegate, CNContactPickerDelegate, ServiceToolsDelegate, WKUIDelegate, WKScriptMessageHandler>
+#define IFLY_AUDIO_SOURCE_STREAM @"-1"
+
+#pragma mark - const values
+
+NSString* const KCAudioPcmName=@"iOS";
+NSString* const KCAudioMp3Name=@"iOS.mp3";
+
+@interface ViewController ()<UIGestureRecognizerDelegate, ABPeoplePickerNavigationControllerDelegate, CNContactPickerDelegate, ServiceToolsDelegate, WKUIDelegate, WKScriptMessageHandler, IFlyPcmRecorderDelegate, IFlySpeechEvaluatorDelegate>
 
 @property (strong, nonatomic) AppDelegate *app;
 
 @property (nonatomic, strong)UIView *downView;
 
 @property (nonatomic, strong)LMProgressView *progressView;
+
+// 语音评测
+@property (nonatomic, strong) ISEParams *iseParams;
+@property (nonatomic,assign) BOOL isBeginOfSpeech;//Whether or not SDK has invoke the delegate methods of beginOfSpeech.
+@property (nonatomic,strong) IFlyPcmRecorder *pcmRecorder;//PCM Recorder to be used to demonstrate Audio Stream Evaluation.
+@property (nonatomic, strong) IFlySpeechEvaluator *iFlySpeechEvaluator;
+@property (nonatomic, assign) BOOL is_begin;
+@property (nonatomic, strong) NSString *result_xmlBase64;
+@property (nonatomic, strong) NSData *mp3Data;
 
 @end
 
@@ -517,14 +538,28 @@
         // 录音
         else if([message.body[@"a"] isEqualToString:@"录音"]) {
             
-            WKWebView *webView = weakSelf.webView;
-            // 录音
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSString *b = message.body[@"b"];
-                ISEViewController *vc = [[ISEViewController alloc] init];
-                vc.read_content = b;
-                vc.webView = webView;
-                [self presentViewController:vc animated:YES completion:^{ }];
+//                ISEViewController *vc = [[ISEViewController alloc] init];
+//                vc.read_content = b;
+//                vc.webView = webView;
+//                [self presentViewController:vc animated:YES completion:^{ }];
+                [self read_click:b];
+            });
+        }
+        // 录音
+        else if([message.body[@"a"] isEqualToString:@"销毁录音"]) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self onBtnStop];
+                self.is_begin = false;
+            });
+        }
+        // 上传mp3文件，将评测结果返回给vue
+        else if([message.body[@"a"] isEqualToString:@"请求评测结果"]) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self uploadMp3];
             });
         }
     }
@@ -1065,6 +1100,310 @@
             NSLog(@"刷新内容完成");
         });
     });
+}
+
+/*!
+ *  callback of ISE setting
+ */
+- (void)onParamsChanged:(ISEParams *)params {
+    
+    self.iseParams = params;
+}
+
+#pragma mark - IFlySpeechEvaluatorDelegate
+
+/*!
+ *  volume callback,range from 0 to 30.
+ */
+- (void)onVolumeChanged:(int)volume buffer:(NSData *)buffer {
+        NSLog(@"volume:%d",volume);
+}
+
+/*!
+ *  Beginning Of Speech
+ */
+- (void)onBeginOfSpeech {
+    
+    if ([self.iseParams.audioSource isEqualToString:IFLY_AUDIO_SOURCE_STREAM]){
+        _isBeginOfSpeech =YES;
+    }
+    
+}
+
+/*!
+ *  End Of Speech
+ */
+- (void)onEndOfSpeech {
+    
+    if ([self.iseParams.audioSource isEqualToString:IFLY_AUDIO_SOURCE_STREAM]){
+        [_pcmRecorder stop];
+    }
+    
+}
+
+/*!
+ *  callback of canceling evaluation
+ */
+- (void)onCancel {
+    
+}
+
+/*!
+ *  evaluation session completion, which will be invoked no matter whether it exits error.
+ *  error.errorCode =
+ *  0     success
+ *  other fail
+ */
+- (void)onCompleted:(IFlySpeechError *)errorCode {
+    if(errorCode && errorCode.errorCode!=0){
+//        [self.popupView setText:[NSString stringWithFormat:@"Error：%d %@",[errorCode errorCode],[errorCode errorDesc]]];
+//        [self.view addSubview:self.popupView];
+        
+    }
+}
+
+/*!
+ *  result callback of speech evaluation
+ *  results：evaluation results
+ *  isLast：whether or not this is the last result
+ */
+- (void)onResults:(NSData *)results isLast:(BOOL)isLast{
+    
+    NSLog(@"评测结果");
+    
+    if (results) {
+        
+        NSString *showText = @"";
+        const char* chResult=[results bytes];
+        BOOL isUTF8=[[self.iFlySpeechEvaluator parameterForKey:[IFlySpeechConstant RESULT_ENCODING]]isEqualToString:@"utf-8"];
+        NSString* strResults=nil;
+        if(isUTF8){
+            strResults=[[NSString alloc] initWithBytes:chResult length:[results length] encoding:NSUTF8StringEncoding];
+        }else{
+            NSStringEncoding encoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+            strResults=[[NSString alloc] initWithBytes:chResult length:[results length] encoding:encoding];
+        }
+        if(strResults){
+            
+            NSData *data = [strResults dataUsingEncoding:NSUTF8StringEncoding];
+            self.result_xmlBase64 = [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed]; // base64格式的字符串
+            
+            // pcm转mp3
+            [self audio_PCMtoMP3:[self getCachesMp3Path] andPcmPath:[self getCachesPcmPath]];
+            NSString *filePath = [self getCachesMp3Path];
+            self.mp3Data = [[NSData alloc]  initWithContentsOfFile: filePath];
+        }
+    }
+}
+
+#pragma mark - ISEResultXmlParserDelegate
+
+-(void)onISEResultXmlParser:(NSXMLParser *)parser Error:(NSError*)error{
+    
+}
+
+-(void)onISEResultXmlParserResult:(ISEResult*)result{
+    
+//    self.resultView.text=[result toString];
+}
+
+
+#pragma mark - IFlyPcmRecorderDelegate
+
+- (void) onIFlyRecorderBuffer: (const void *)buffer bufferSize:(int)size
+{
+    NSData *audioBuffer = [NSData dataWithBytes:buffer length:size];
+    
+    int ret = [self.iFlySpeechEvaluator writeAudio:audioBuffer];
+    if (!ret)
+    {
+        [self.iFlySpeechEvaluator stopListening];
+    }
+}
+
+- (void) onIFlyRecorderError:(IFlyPcmRecorder*)recoder theError:(int) error
+{
+    NSLog(@"fds");
+}
+
+//range from 0 to 30
+- (void) onIFlyRecorderVolumeChanged:(int) power
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self.popupView setText:[NSString stringWithFormat:@"%@：%d", NSLocalizedString(@"T_RecVol", nil),power]];
+//        [self.view addSubview:self.popupView];
+    });
+}
+
+- (void)audio_PCMtoMP3:(NSString *)mp3_path andPcmPath:(NSString *)pcm_path {
+    
+    NSString *mp3FilePath = mp3_path;
+    NSString *_recordFilePath = pcm_path;
+    @try {
+        int read, write;
+        FILE *pcm = fopen([_recordFilePath cStringUsingEncoding:1], "rb");  //source 被转换的音频文件位置
+        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
+        FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], "wb");  //output 输出生成的Mp3文件位置
+        const int PCM_SIZE = 8192;//8192
+        const int MP3_SIZE = 8192;//8192
+        short int pcm_buffer[PCM_SIZE*2];
+        unsigned char mp3_buffer[MP3_SIZE];
+        lame_t lame = lame_init();
+        lame_set_in_samplerate(lame, 7500.0);//采样播音速度，值越大播报速度越快，反之。
+        lame_set_VBR(lame, vbr_default);
+        lame_init_params(lame);
+        do {
+            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
+            if (read == 0) {
+                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
+            }else
+                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
+            fwrite(mp3_buffer, write, 1, mp3);
+        } while (read != 0);
+        lame_close(lame);
+        fclose(mp3);
+        fclose(pcm);
+        NSLog(@"pcm转mp3成功");
+    }
+    @catch (NSException *exception) {
+        NSLog(@"pcm转mp3失败%@",[exception description]);
+    }
+}
+
+- (NSString *)getCachesMp3Path {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths objectAtIndex:0];
+    NSString *filePath = [path stringByAppendingPathComponent:KCAudioMp3Name];
+    return filePath;
+}
+
+- (NSString *)getCachesPcmPath {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths objectAtIndex:0];
+    NSString *filePath = [path stringByAppendingPathComponent:KCAudioPcmName];
+    return filePath;
+}
+
+- (void)read_click:(NSString *)read_content {
+    
+    self.is_begin = !self.is_begin;
+    __weak __typeof(self)weakSelf = self;
+    if(self.is_begin){
+        NSLog(@"开始录制");
+        [self onBtnStart:read_content];
+        [IOSToVue TellVueStartRecord:weakSelf.webView];
+    }else{
+        NSLog(@"结束录制");
+        [self onBtnStop];
+        [IOSToVue TellVueStopRecord:weakSelf.webView];
+    }
+}
+
+- (void)onBtnStart:(NSString *)read_content {
+    
+    if (!self.iFlySpeechEvaluator) {
+        self.iFlySpeechEvaluator = [IFlySpeechEvaluator sharedInstance];
+    }
+    self.iFlySpeechEvaluator.delegate = self;
+    //empty params
+    [self.iFlySpeechEvaluator setParameter:@"" forKey:[IFlySpeechConstant PARAMS]];
+    self.iseParams=[ISEParams fromUserDefaults];
+    [self.iFlySpeechEvaluator setParameter:@"10000" forKey:[IFlySpeechConstant VAD_BOS]];
+    [self.iFlySpeechEvaluator setParameter:@"10000" forKey:[IFlySpeechConstant VAD_EOS]];
+    [self.iFlySpeechEvaluator setParameter:@"read_chapter" forKey:[IFlySpeechConstant ISE_CATEGORY]];
+    [self.iFlySpeechEvaluator setParameter:@"zh_cn" forKey:[IFlySpeechConstant LANGUAGE]];
+    [self.iFlySpeechEvaluator setParameter:@"complete" forKey:[IFlySpeechConstant ISE_RESULT_LEVEL]];
+    [self.iFlySpeechEvaluator setParameter:@"-1" forKey:[IFlySpeechConstant SPEECH_TIMEOUT]];
+    [self.iFlySpeechEvaluator setParameter:@"1" forKey:[IFlySpeechConstant AUDIO_SOURCE]];
+    //Initialize recorder
+    if (_pcmRecorder == nil) {
+        _pcmRecorder = [IFlyPcmRecorder sharedInstance];
+    }
+    _pcmRecorder.delegate = self;
+    [_pcmRecorder setSample:@"16000"];
+    
+    NSLog(@"%s[IN]",__func__);
+    [self.iFlySpeechEvaluator setParameter:@"16000" forKey:[IFlySpeechConstant SAMPLE_RATE]];
+    [self.iFlySpeechEvaluator setParameter:@"utf-8" forKey:[IFlySpeechConstant TEXT_ENCODING]];
+    [self.iFlySpeechEvaluator setParameter:@"xml" forKey:[IFlySpeechConstant ISE_RESULT_TYPE]];
+    [self.iFlySpeechEvaluator setParameter:KCAudioPcmName forKey:[IFlySpeechConstant ISE_AUDIO_PATH]];
+    NSStringEncoding encoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+    NSLog(@"text encoding:%@",[self.iFlySpeechEvaluator parameterForKey:[IFlySpeechConstant TEXT_ENCODING]]);
+    NSLog(@"language:%@",[self.iFlySpeechEvaluator parameterForKey:[IFlySpeechConstant LANGUAGE]]);
+    
+    BOOL isUTF8=[[self.iFlySpeechEvaluator parameterForKey:[IFlySpeechConstant TEXT_ENCODING]] isEqualToString:@"utf-8"];
+    BOOL isZhCN=[[self.iFlySpeechEvaluator parameterForKey:[IFlySpeechConstant LANGUAGE]] isEqualToString:KCLanguageZHCN];
+    
+    BOOL needAddTextBom=isUTF8&&isZhCN;
+    NSMutableData *buffer = nil;
+    if(needAddTextBom){
+//        self.textView.text = _read_content;
+        if(read_content && [read_content length]>0){
+            Byte bomHeader[] = { 0xEF, 0xBB, 0xBF };
+            buffer = [NSMutableData dataWithBytes:bomHeader length:sizeof(bomHeader)];
+            [buffer appendData:[read_content dataUsingEncoding:NSUTF8StringEncoding]];
+            NSLog(@" \ncn buffer length: %lu",(unsigned long)[buffer length]);
+        }
+    }else{
+        buffer= [NSMutableData dataWithData:[read_content dataUsingEncoding:encoding]];
+        NSLog(@" \nen buffer length: %lu",(unsigned long)[buffer length]);
+    }
+    read_content = NSLocalizedString(@"M_ISE_Noti2", nil);
+    
+    BOOL ret = [self.iFlySpeechEvaluator startListening:buffer params:nil];
+    if(ret){
+        
+        //Set audio stream as audio source,which requires the developer import audio data into the recognition control by self through "writeAudio:".
+        if ([self.iseParams.audioSource isEqualToString:IFLY_AUDIO_SOURCE_STREAM]){
+            
+            _isBeginOfSpeech = NO;
+            //set the category of AVAudioSession
+            [IFlyAudioSession initRecordingAudioSession];
+            
+            _pcmRecorder.delegate = self;
+            
+            //start recording
+            BOOL ret = [_pcmRecorder start];
+            
+            NSLog(@"%s[OUT],Success,Recorder ret=%d",__func__,ret);
+        }
+    }
+}
+
+/*!
+ *  stop recording
+ */
+- (void)onBtnStop {
+    
+    if ([self.iseParams.audioSource isEqualToString:IFLY_AUDIO_SOURCE_STREAM] && !_isBeginOfSpeech){
+        NSLog(@"%s,stop recording",__func__);
+        [_pcmRecorder stop];
+    }
+    
+    [self.iFlySpeechEvaluator stopListening];
+}
+
+// 上传mp3音频文件，将评测结果返回给vue显示
+- (void)uploadMp3 {
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.label.text = @"提交评测信息...";
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"image/jpeg", nil];
+    [manager POST:@"https://ise.yocou.com/index.php?type=yp_url" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:self.mp3Data name:@"file" fileName:KCAudioMp3Name mimeType:@"audio/wav"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        NSLog(@"上传进度：%@", uploadProgress);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"上传成功：%@", responseObject);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [IOSToVue TellVueReadGswXml:self->_webView andXml:self.result_xmlBase64 andMp3Path:responseObject[@"data"]];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"上传失败");
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
 }
 
 @end

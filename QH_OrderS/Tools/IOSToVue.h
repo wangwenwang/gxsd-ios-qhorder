@@ -60,6 +60,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 告诉Vue科大讯飞语音评测返回值xml和上传服务器的音频地址
 + (void)TellVueReadGswXml:(nullable WKWebView *)webView andXml:(nullable NSString *)xml andMp3Path:(nullable NSString *)path;
 
+/// 开始录制，语音评测
++ (void)TellVueStartRecord:(nullable WKWebView *)webView;
+
+/// 结束录制，语音评测
++ (void)TellVueStopRecord:(nullable WKWebView *)webView;
+
 @end
 
 NS_ASSUME_NONNULL_END

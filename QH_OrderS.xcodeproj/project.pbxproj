@@ -84,11 +84,11 @@
 		3B79284F22F432AF009FCAF8 /* LMGetLoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284922F432AF009FCAF8 /* LMGetLoc.m */; };
 		3B79285022F432AF009FCAF8 /* IOSToVue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284A22F432AF009FCAF8 /* IOSToVue.m */; };
 		3B79285122F432AF009FCAF8 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284B22F432AF009FCAF8 /* Tools.m */; };
-		3BA42DE825A3515C00D504CD /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3BA42DE725A3515C00D504CD /* dist.zip */; };
 		3BA4772B259FFD280078F57E /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA4772A259FFD280078F57E /* iflyMSC.framework */; };
 		3BA4773225A07AC00078F57E /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA4773025A07AC00078F57E /* libmp3lame.a */; };
 		3BD20FA4230A9E73001A52A4 /* ServiceTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD20FA2230A9E73001A52A4 /* ServiceTools.m */; };
 		3BD20FAC230AC9CE001A52A4 /* BMKLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD20FAB230AC9CE001A52A4 /* BMKLocationKit.framework */; };
+		3BD6C7B825A4A5CE008BF6B6 /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3BD6C7B725A4A5CE008BF6B6 /* dist.zip */; };
 		3BE88EA3232169FD008AC8E7 /* LocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE88EA0232169FD008AC8E7 /* LocationModel.m */; };
 		3BE88EA4232169FD008AC8E7 /* RouteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE88EA1232169FD008AC8E7 /* RouteAnnotation.m */; };
 		9CFB11A5FB77436ED36CDE93 /* libPods-QH_OrderS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DA69FEE1BB9777B55ADB628 /* libPods-QH_OrderS.a */; };
@@ -252,7 +252,6 @@
 		3B79284C22F432AF009FCAF8 /* IOSToVue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOSToVue.h; sourceTree = "<group>"; };
 		3B79284D22F432AF009FCAF8 /* LMGetLoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMGetLoc.h; sourceTree = "<group>"; };
 		3B79284E22F432AF009FCAF8 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
-		3BA42DE725A3515C00D504CD /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
 		3BA4772A259FFD280078F57E /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		3BA4773025A07AC00078F57E /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
 		3BA4773125A07AC00078F57E /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
@@ -261,6 +260,7 @@
 		3BD20FA2230A9E73001A52A4 /* ServiceTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceTools.m; sourceTree = "<group>"; };
 		3BD20FA3230A9E73001A52A4 /* ServiceTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceTools.h; sourceTree = "<group>"; };
 		3BD20FAB230AC9CE001A52A4 /* BMKLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BMKLocationKit.framework; sourceTree = "<group>"; };
+		3BD6C7B725A4A5CE008BF6B6 /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
 		3BE88E9F232169FD008AC8E7 /* RouteAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteAnnotation.h; sourceTree = "<group>"; };
 		3BE88EA0232169FD008AC8E7 /* LocationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationModel.m; sourceTree = "<group>"; };
 		3BE88EA1232169FD008AC8E7 /* RouteAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteAnnotation.m; sourceTree = "<group>"; };
@@ -378,7 +378,7 @@
 			children = (
 				3BBB5D3D2466620D002FE6A3 /* 高效速读.entitlements */,
 				3B04E18522DD757F005840FC /* Default-568@2x.png */,
-				3BA42DE725A3515C00D504CD /* dist.zip */,
+				3BD6C7B725A4A5CE008BF6B6 /* dist.zip */,
 				3BE88E9E232169FD008AC8E7 /* Custum */,
 				3B2CFB7F231D3E9F0039C483 /* Category */,
 				3BD20FA1230A9E73001A52A4 /* Service */,
@@ -835,7 +835,7 @@
 				3B435695233DFE0400D38552 /* YBShowLocationVC.xib in Resources */,
 				3B435693233DFE0400D38552 /* YBCurrentLocationCell.xib in Resources */,
 				3B435691233DFE0400D38552 /* YBNeighborLocationCell.xib in Resources */,
-				3BA42DE825A3515C00D504CD /* dist.zip in Resources */,
+				3BD6C7B825A4A5CE008BF6B6 /* dist.zip in Resources */,
 				3B35F6882594EED3001C9E81 /* ISEViewController.xib in Resources */,
 				3B04E18622DD757F005840FC /* Default-568@2x.png in Resources */,
 			);

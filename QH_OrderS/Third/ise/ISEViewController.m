@@ -23,6 +23,7 @@
 #define _DEMO_UI_TOOLBAR_HEIGHT          44
 #define _DEMO_UI_STATUSBAR_HEIGHT        20
 
+
 #pragma mark - const values
 
 NSString* const KCTextCNSyllable=@"text_cn_syllable";
@@ -30,8 +31,8 @@ NSString* const KCTextCNWord=@"text_cn_word";
 NSString* const KCTextCNSentence=@"text_cn_sentence";
 NSString* const KCTextENWord=@"text_en_word";
 NSString* const KCTextENSentence=@"text_en_sentence";
-NSString* const KCAudioPcmName=@"iOS";
-NSString* const KCAudioMp3Name=@"iOS.mp3";
+NSString* const KCAudio_PcmName=@"iOS";
+NSString* const KCAudio_Mp3Name=@"iOS.mp3";
 
 #pragma mark -
 
@@ -324,7 +325,7 @@ static NSString *LocalizedEvaString(NSString *key, NSString *comment) {
     [self.iFlySpeechEvaluator setParameter:@"16000" forKey:[IFlySpeechConstant SAMPLE_RATE]];
     [self.iFlySpeechEvaluator setParameter:@"utf-8" forKey:[IFlySpeechConstant TEXT_ENCODING]];
     [self.iFlySpeechEvaluator setParameter:@"xml" forKey:[IFlySpeechConstant ISE_RESULT_TYPE]];
-    [self.iFlySpeechEvaluator setParameter:KCAudioPcmName forKey:[IFlySpeechConstant ISE_AUDIO_PATH]];
+    [self.iFlySpeechEvaluator setParameter:KCAudio_PcmName forKey:[IFlySpeechConstant ISE_AUDIO_PATH]];
     NSStringEncoding encoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     NSLog(@"text encoding:%@",[self.iFlySpeechEvaluator parameterForKey:[IFlySpeechConstant TEXT_ENCODING]]);
     NSLog(@"language:%@",[self.iFlySpeechEvaluator parameterForKey:[IFlySpeechConstant LANGUAGE]]);
@@ -397,7 +398,7 @@ static NSString *LocalizedEvaString(NSString *key, NSString *comment) {
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *path = [paths objectAtIndex:0];
-    NSString *filePath = [path stringByAppendingPathComponent:KCAudioPcmName];
+    NSString *filePath = [path stringByAppendingPathComponent:KCAudio_PcmName];
     return filePath;
 }
 
@@ -405,7 +406,7 @@ static NSString *LocalizedEvaString(NSString *key, NSString *comment) {
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *path = [paths objectAtIndex:0];
-    NSString *filePath = [path stringByAppendingPathComponent:KCAudioMp3Name];
+    NSString *filePath = [path stringByAppendingPathComponent:KCAudio_Mp3Name];
     return filePath;
 }
 
@@ -571,7 +572,7 @@ static NSString *LocalizedEvaString(NSString *key, NSString *comment) {
                     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"image/jpeg", nil];
                     __weak __typeof(self)weakSelf = self;
                     [manager POST:@"https://ise.yocou.com/index.php?type=yp_url" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-                        [formData appendPartWithFileData:mp3Data name:@"file" fileName:KCAudioMp3Name mimeType:@"audio/wav"];
+                        [formData appendPartWithFileData:mp3Data name:@"file" fileName:KCAudio_Mp3Name mimeType:@"audio/wav"];
                     } progress:^(NSProgress * _Nonnull uploadProgress) {
                         NSLog(@"上传进度：%@", uploadProgress);
                     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

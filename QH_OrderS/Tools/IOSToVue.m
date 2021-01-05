@@ -100,4 +100,16 @@
     [IOSToVue TellVueMsg:webView andJsStr:jsStr];
 }
 
++ (void)TellVueStartRecord:(nullable WKWebView *)webView {
+    
+    NSString *jsStr = [NSString stringWithFormat:@"LM_AndroidIOSToVue_startRecord()"];
+    [IOSToVue TellVueMsg:webView andJsStr:jsStr];
+}
+
++ (void)TellVueStopRecord:(nullable WKWebView *)webView {
+    
+    NSString *jsStr = [NSString stringWithFormat:@"LM_AndroidIOSToVue_stopRecord()"];
+    [IOSToVue TellVueMsg:webView andJsStr:jsStr];
+}
+
 @end
