@@ -112,4 +112,10 @@
     [IOSToVue TellVueMsg:webView andJsStr:jsStr];
 }
 
++ (void)TellVueUpdateUserInfoCompleted:(nullable WKWebView *)webView {
+    
+    NSString *jsStr = [NSString stringWithFormat:@"LM_AndroidIOSToVue_updateUserInfoCompleted()"];
+    [IOSToVue TellVueMsg:webView andJsStr:jsStr];
+}
+
 @end

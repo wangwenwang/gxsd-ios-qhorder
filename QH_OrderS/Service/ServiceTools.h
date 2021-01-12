@@ -36,4 +36,15 @@
 /// @param showPrompt 是否显示提示
 - (void)queryAppVersion:(BOOL)showPrompt;
 
+
+/// 更新用户信息
+/// @param userId 用户id
+/// @param organizationName 学校名称
+/// @param province 省
+/// @param city 市
+/// @param area 区/县
+/// @param address 详细地址
+/// @param token 公钥
+- (void)uploadUserInfo:(nullable NSString *)userId andOrganizationName:(nullable NSString *)organizationName andProvince:(nullable NSString *)province andCity:(nullable NSString *)city andArea:(nullable NSString *)area andAddress:(nullable NSString *)address andToken:(nullable NSString *)token;
+
 @end

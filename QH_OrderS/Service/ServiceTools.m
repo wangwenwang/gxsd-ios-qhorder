@@ -141,4 +141,24 @@
     
 }
 
+- (void)uploadUserInfo:(nullable NSString *)userId andOrganizationName:(nullable NSString *)organizationName andProvince:(nullable NSString *)province andCity:(nullable NSString *)city andArea:(nullable NSString *)area andAddress:(nullable NSString *)address andToken:(nullable NSString *)token {
+    NSString *url = @"https://www.gxsd.mobi/gxsd-test/app/user/updateUserInfo";
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager.requestSerializer setValue:token forHTTPHeaderField:@"token"];
+    NSDictionary *params = @{@"userId": userId, @"organizationName": organizationName, @"province": province, @"city": city, @"area": area, @"address": address};
+    NSLog(@"接口:%@|更新用户信息参数：%@", url, params);
+    [manager POST:url parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        nil;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"请求成功---%@", responseObject);
+        int code = [responseObject[@"code"] intValue];
+        if(code == 200) {
+            [Tools showAlert:((AppDelegate*)([UIApplication sharedApplication].delegate)).window andTitle:@"更新成功"];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败---%@", error);
+        [Tools showAlert:((AppDelegate*)([UIApplication sharedApplication].delegate)).window andTitle:@"请求失败"];
+    }];
+}
+
 @end

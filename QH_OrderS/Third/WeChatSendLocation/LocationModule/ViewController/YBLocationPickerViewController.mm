@@ -14,6 +14,7 @@
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import <BaiduMapAPI_Search/BMKSearchComponent.h>
 #import <BaiduMapAPI_Utils/BMKUtilsComponent.h>
+#import "ServiceTools.h"
 @interface YBLocationPickerViewController ()<BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,YBLocationSearchResultViewControllerDelegate,UISearchResultsUpdating, UISearchControllerDelegate,UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) BMKMapView *mapView;
@@ -29,6 +30,7 @@
 @property (assign, nonatomic, getter=isGeocode) BOOL geocode;
 @property (assign, nonatomic, getter=isFirstlocation) BOOL firstlocation;
 @property (copy, nonatomic) NSString *searchKeyword;
+@property (strong, nonatomic) BMKAddressComponent *addressComponent;
 
 @end
 
@@ -143,6 +145,7 @@ static NSString *const kCurrentlocationCellId = @"kCurrentlocationCellId";
         self.searchResultController.userCity = result.addressDetail.city;
         self.firstlocation = NO;
     }
+    self.addressComponent =  result.addressDetail;
     [self.nearbylocations removeAllObjects];
     [self.nearbylocations addObjectsFromArray:result.poiList];
     [self.tableView reloadData];
@@ -272,12 +275,18 @@ static NSString *const kCurrentlocationCellId = @"kCurrentlocationCellId";
     NSIndexPath *selectIndex = [self.tableView indexPathForSelectedRow];
     if (selectIndex.row >= 0) {
         BMKPoiInfo *info = [self.nearbylocations objectAtIndex:selectIndex.row];
+        NSString *province = self.addressComponent.province;
+        NSString *city = self.addressComponent.city;
+        NSString *area = self.addressComponent.district;
         NSMutableDictionary *locationDic = [NSMutableDictionary dictionary];
-        [locationDic setObject:info.name forKey:@"name"];
+        [locationDic setObject:_userId forKey:@"userId"];
+        [locationDic setObject:info.name forKey:@"organizationName"];
+        [locationDic setObject:province forKey:@"province"];
+        [locationDic setObject:city forKey:@"city"];
+        [locationDic setObject:area forKey:@"area"];
         [locationDic setObject:info.address forKey:@"address"];
-        [locationDic setObject:[NSString stringWithFormat:@"%f,%f",info.pt.latitude,info.pt.longitude] forKey:@"pt"];
-        [locationDic setObject:[NSString stringWithFormat:@"%f",info.pt.longitude] forKey:@"LONGITUDE"];
-        [locationDic setObject:[NSString stringWithFormat:@"%f",info.pt.latitude] forKey:@"LATITUDE"];
+        [locationDic setObject:_token forKey:@"token"];
+        [[[ServiceTools alloc] init] uploadUserInfo:_userId andOrganizationName:info.name andProvince:province andCity:city andArea:area andAddress:info.address andToken:_token];
         if ([self.delegate respondsToSelector:@selector(locationPickerViewController:didSelectAddressWithLocationInfo:)]) {
             [self.delegate locationPickerViewController:self didSelectAddressWithLocationInfo:locationDic];
         }

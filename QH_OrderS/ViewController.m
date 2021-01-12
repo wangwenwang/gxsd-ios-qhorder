@@ -562,6 +562,29 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
                 [self uploadMp3];
             });
         }
+        // 发送位置
+        else if([message.body[@"a"] isEqualToString:@"发送位置"]) {
+            
+            NSString *token = message.body[@"token"];
+            NSString *userId = message.body[@"userId"];
+            
+            YBLocationPickerViewController *picker = [[YBLocationPickerViewController alloc] init];
+            picker.token = token;
+            picker.userId = userId;
+            
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:picker];
+            nav.modalPresentationStyle = UIModalPresentationFullScreen;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self presentViewController:nav animated:YES completion:^{ }];
+                
+                picker.locationSelectBlock = ^(id locationInfo, YBLocationPickerViewController *locationPickController) {
+                    NSLog(@"%@",locationInfo);
+                    [IOSToVue TellVueUpdateUserInfoCompleted:weakSelf.webView];
+                };
+            });
+        }
     }
 }
 

@@ -66,6 +66,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 结束录制，语音评测
 + (void)TellVueStopRecord:(nullable WKWebView *)webView;
 
+/// 更新用户信息已完成
++ (void)TellVueUpdateUserInfoCompleted:(nullable WKWebView *)webView;
+
 @end
 
 NS_ASSUME_NONNULL_END
