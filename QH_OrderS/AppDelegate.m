@@ -51,14 +51,14 @@
     // 接收webview
     [self addNotification];
     
-//    _mapManager = [[BMKMapManager alloc] init];
-//    // 如果要关注网络及授权验证事件，请设定generalDelegate参数
-//    BOOL ret = [_mapManager start:@"4jbykZazhrqFBIozwWwfIyEeFibvKe9E"  generalDelegate:nil];
-//    if (!ret) {
-//        NSLog(@"百度地图加载失败！");
-//    }else {
-//        NSLog(@"百度地图加载成功！");
-//    }
+    _mapManager = [[BMKMapManager alloc] init];
+    // 如果要关注网络及授权验证事件，请设定generalDelegate参数
+    BOOL ret = [_mapManager start:@"4jbykZazhrqFBIozwWwfIyEeFibvKe9E"  generalDelegate:nil];
+    if (!ret) {
+        NSLog(@"百度地图加载失败！");
+    }else {
+        NSLog(@"百度地图加载成功！");
+    }
     
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
