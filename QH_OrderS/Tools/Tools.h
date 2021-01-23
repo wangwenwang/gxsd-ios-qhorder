@@ -170,4 +170,8 @@
 /// 获取用户角色，1老师/2学生
 + (nullable NSString *)get_role;
 
+
+/// 获取百度地图ak
++ (nullable NSString *)get_baidu_map_ak;
+
 @end

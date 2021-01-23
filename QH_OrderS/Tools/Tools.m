@@ -287,4 +287,14 @@
     }
 }
 
++ (nullable NSString *)get_baidu_map_ak{
+    if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios"]){
+        return BDMAPAK_student;
+    }else if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios-teacher"]){
+        return BDMAPAK_teacher;
+    }else{
+        return @"";
+    }
+}
+
 @end

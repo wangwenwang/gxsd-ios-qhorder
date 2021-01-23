@@ -110,6 +110,11 @@
 #define WXAPPSECRED_teacher @"63f13ceaad54fe8ee638dc08052ba5b6"
 
 
+// 百度地图ak
+#define BDMAPAK_student @"4jbykZazhrqFBIozwWwfIyEeFibvKe9E"
+#define BDMAPAK_teacher @"9eTQbQWcfwmmPR69Fx0stl4sLC54nXkd"
+
+
 // 反地理编码函数，把位置告诉Vue
 #define GeoOfTellVue @"GeoOfTellVue"
 

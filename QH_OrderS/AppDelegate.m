@@ -53,7 +53,8 @@
     
     _mapManager = [[BMKMapManager alloc] init];
     // 如果要关注网络及授权验证事件，请设定generalDelegate参数
-    BOOL ret = [_mapManager start:@"4jbykZazhrqFBIozwWwfIyEeFibvKe9E"  generalDelegate:nil];
+    
+    BOOL ret = [_mapManager start:[Tools get_baidu_map_ak]  generalDelegate:nil];
     if (!ret) {
         NSLog(@"百度地图加载失败！");
     }else {
