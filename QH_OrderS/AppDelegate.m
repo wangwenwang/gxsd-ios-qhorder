@@ -31,7 +31,9 @@
 
 #import <IFlyMSC/IFlyMSC.h>
 
-@interface AppDelegate ()<ServiceToolsDelegate, WXApiDelegate>
+#import <SharetraceSDK/SharetraceSDK.h>
+
+@interface AppDelegate ()<ServiceToolsDelegate, WXApiDelegate, SharetraceDelegate>
 
 @property (strong, nonatomic) WKWebView *webView;
 
@@ -92,6 +94,8 @@
     NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@", @"5f9a1b08"];
     //Configure and initialize iflytek services.(This interface must been invoked in application:didFinishLaunchingWithOptions:)
     [IFlySpeechUtility createUtility:initString];
+    
+    [Sharetrace initWithDelegate:self appKey:@"88e7bea3c760a53b"];
     
     return YES;
 }

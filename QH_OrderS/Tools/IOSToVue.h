@@ -69,6 +69,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 更新用户信息已完成
 + (void)TellVueUpdateUserInfoCompleted:(nullable WKWebView *)webView;
 
+/// 安卓/iOS原生发送推荐人渠道和账号给 vue
++ (void)TellVueRecommend:(nullable WKWebView *)webView andRecommend:(nullable NSString *)channel andTel:(nullable NSString *)tel;
+
 @end
 
 NS_ASSUME_NONNULL_END

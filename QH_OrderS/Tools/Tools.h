@@ -174,4 +174,10 @@
 /// 获取百度地图ak
 + (nullable NSString *)get_baidu_map_ak;
 
+// url参数转字典
++ (nullable NSDictionary *)dictionaryWithUrlParamsString:(nullable NSString *)paramsStr;
+
+// URL解码
++ (nullable NSString *)URLDecodedString:(nullable NSString *)str;
+
 @end

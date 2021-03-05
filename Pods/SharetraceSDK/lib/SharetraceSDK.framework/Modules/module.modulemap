@@ -1,0 +1,6 @@
+framework module SharetraceSDK {
+  umbrella header "SharetraceSDK.h"
+
+  export *
+  module * { export * }
+}

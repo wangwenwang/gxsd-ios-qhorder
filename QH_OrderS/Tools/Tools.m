@@ -297,4 +297,27 @@
     }
 }
 
++ (nullable NSDictionary *)dictionaryWithUrlParamsString:(nullable NSString *)paramsStr {
+    if (paramsStr.length) {
+        NSMutableDictionary *paramsDict = [NSMutableDictionary dictionary];
+        NSArray *paramArray = [paramsStr componentsSeparatedByString:@"&"];
+        for (NSString *param in paramArray) {
+            if (param && param.length) {
+                NSArray *parArr = [param componentsSeparatedByString:@"="];
+                if (parArr.count == 2) {
+                    [paramsDict setObject:parArr[1] forKey:parArr[0]];
+                }
+            }
+        }
+        return paramsDict;
+    }else{
+        return nil;
+    }
+}
+
++ (nullable NSString *)URLDecodedString:(nullable NSString *)str {
+    NSString *decodedString=(__bridge_transfer NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL, (__bridge CFStringRef)str, CFSTR(""), CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
+    return decodedString;
+}
+
 @end

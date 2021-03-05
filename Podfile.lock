@@ -19,6 +19,7 @@ PODS:
   - LMProgressView (1.0.3)
   - MBProgressHUD (1.0.0)
   - MHTextField (0.6)
+  - SharetraceSDK (2.1.0)
   - SSZipArchive (2.1.5)
   - WechatOpenSDK (1.8.7.1)
   - XHTextField (1.1)
@@ -30,6 +31,7 @@ DEPENDENCIES:
   - LMProgressView
   - MBProgressHUD (~> 1.0.0)
   - MHTextField (~> 0.5)
+  - SharetraceSDK
   - SSZipArchive
   - WechatOpenSDK (~> 1.8.7.1)
   - XHTextField
@@ -42,6 +44,7 @@ SPEC REPOS:
     - LMProgressView
     - MBProgressHUD
     - MHTextField
+    - SharetraceSDK
     - SSZipArchive
     - WechatOpenSDK
     - XHTextField
@@ -53,10 +56,11 @@ SPEC CHECKSUMS:
   LMProgressView: f6fb98f7ad2a0ef00156f892eef6c99b7046b66c
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MHTextField: c13dad029b2a3da5e6a1c7adc7fa499ca8a976e5
+  SharetraceSDK: 7f02e4b87e049a7c7a1ae94ef85b2267e57063a9
   SSZipArchive: cefe1364104a0231268a5deb8495bdf2861f52f0
   WechatOpenSDK: 6a4d1436c15b3b5fe2a0bd383f3046010186da44
   XHTextField: 67abde300d82c46940215dd939f96acda90f4e05
 
-PODFILE CHECKSUM: 4f6c4d4da50580c46dda1e756057e219a6b189fb
+PODFILE CHECKSUM: e1b7b50f95b30910b0ff9ee8e0c852b3b9d46cbf
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3

@@ -118,4 +118,10 @@
     [IOSToVue TellVueMsg:webView andJsStr:jsStr];
 }
 
++ (void)TellVueRecommend:(nullable WKWebView *)webView andRecommend:(nullable NSString *)channel andTel:(nullable NSString *)tel {
+    
+    NSString *jsStr = [NSString stringWithFormat:@"LM_AndroidIOSToVue_Recommend('%@','%@')", channel, tel];
+    [IOSToVue TellVueMsg:webView andJsStr:jsStr];
+}
+
 @end

@@ -36,6 +36,8 @@
 #import "ISEResultXmlParser.h"
 #import "lame.h"
 
+#import <SharetraceSDK/SharetraceSDK.h>
+
 #define IFLY_AUDIO_SOURCE_STREAM @"-1"
 
 #pragma mark - const values
@@ -584,6 +586,19 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
                     [IOSToVue TellVueUpdateUserInfoCompleted:weakSelf.webView];
                 };
             });
+        }
+        // 发送推荐人给vue
+        else if([message.body[@"a"] isEqualToString:@"接收推荐人已就绪"]) {
+            
+            [Sharetrace getInstallTrace:^(AppData * _Nullable appdata) {
+                NSDictionary *dict = [Tools dictionaryWithUrlParamsString:[appdata paramsData]];
+                NSString *channel = [Tools URLDecodedString:dict[@"channel"]];
+                NSString *tel = [Tools URLDecodedString:dict[@"tel"]];
+                [IOSToVue TellVueRecommend:weakSelf.webView andRecommend:channel andTel:tel];
+                NSLog(@"ShareTrace success: resumePage：%@; paramsData：%@", [appdata resumePage], [appdata paramsData]);
+            } :^(NSInteger code, NSString * _Nonnull message) {
+                NSLog(@"ShareTrace fail: code：%ld; message：%@", code, message);
+            }];
         }
     }
 }

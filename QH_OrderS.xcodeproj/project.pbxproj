@@ -85,9 +85,9 @@
 		3B79284F22F432AF009FCAF8 /* LMGetLoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284922F432AF009FCAF8 /* LMGetLoc.m */; };
 		3B79285022F432AF009FCAF8 /* IOSToVue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284A22F432AF009FCAF8 /* IOSToVue.m */; };
 		3B79285122F432AF009FCAF8 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284B22F432AF009FCAF8 /* Tools.m */; };
-		3B9E239425BBF85900C2BBB5 /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3B9E239325BBF85900C2BBB5 /* dist.zip */; };
 		3BA4772B259FFD280078F57E /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA4772A259FFD280078F57E /* iflyMSC.framework */; };
 		3BA4773225A07AC00078F57E /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA4773025A07AC00078F57E /* libmp3lame.a */; };
+		3BC0EF5525F20D0E00DCAC8C /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3BC0EF5425F20D0E00DCAC8C /* dist.zip */; };
 		3BD20FA4230A9E73001A52A4 /* ServiceTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD20FA2230A9E73001A52A4 /* ServiceTools.m */; };
 		3BD20FAC230AC9CE001A52A4 /* BMKLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD20FAB230AC9CE001A52A4 /* BMKLocationKit.framework */; };
 		3BE88EA3232169FD008AC8E7 /* LocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE88EA0232169FD008AC8E7 /* LocationModel.m */; };
@@ -254,12 +254,12 @@
 		3B79284C22F432AF009FCAF8 /* IOSToVue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOSToVue.h; sourceTree = "<group>"; };
 		3B79284D22F432AF009FCAF8 /* LMGetLoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMGetLoc.h; sourceTree = "<group>"; };
 		3B79284E22F432AF009FCAF8 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
-		3B9E239325BBF85900C2BBB5 /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
 		3BA4772A259FFD280078F57E /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		3BA4773025A07AC00078F57E /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
 		3BA4773125A07AC00078F57E /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
 		3BBB5D3D2466620D002FE6A3 /* 高效速读.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "高效速读.entitlements"; sourceTree = "<group>"; };
 		3BBF8B66233B616F0070A8ED /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		3BC0EF5425F20D0E00DCAC8C /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
 		3BD20FA2230A9E73001A52A4 /* ServiceTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceTools.m; sourceTree = "<group>"; };
 		3BD20FA3230A9E73001A52A4 /* ServiceTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceTools.h; sourceTree = "<group>"; };
 		3BD20FAB230AC9CE001A52A4 /* BMKLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BMKLocationKit.framework; sourceTree = "<group>"; };
@@ -381,7 +381,7 @@
 			children = (
 				3BBB5D3D2466620D002FE6A3 /* 高效速读.entitlements */,
 				3B04E18522DD757F005840FC /* Default-568@2x.png */,
-				3B9E239325BBF85900C2BBB5 /* dist.zip */,
+				3BC0EF5425F20D0E00DCAC8C /* dist.zip */,
 				3BE88E9E232169FD008AC8E7 /* Custum */,
 				3B2CFB7F231D3E9F0039C483 /* Category */,
 				3BD20FA1230A9E73001A52A4 /* Service */,
@@ -730,6 +730,7 @@
 				3B297DB622DD6D750028847C /* Frameworks */,
 				3B297DB722DD6D750028847C /* Resources */,
 				BB395EC0CFD127F8FC493070 /* [CP] Copy Pods Resources */,
+				A7B91D22AA887114B99A7EF7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -839,7 +840,7 @@
 				3B435695233DFE0400D38552 /* YBShowLocationVC.xib in Resources */,
 				3B435693233DFE0400D38552 /* YBCurrentLocationCell.xib in Resources */,
 				3B435691233DFE0400D38552 /* YBNeighborLocationCell.xib in Resources */,
-				3B9E239425BBF85900C2BBB5 /* dist.zip in Resources */,
+				3BC0EF5525F20D0E00DCAC8C /* dist.zip in Resources */,
 				3B35F6882594EED3001C9E81 /* ISEViewController.xib in Resources */,
 				3B04E18622DD757F005840FC /* Default-568@2x.png in Resources */,
 			);
@@ -878,6 +879,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A7B91D22AA887114B99A7EF7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BB395EC0CFD127F8FC493070 /* [CP] Copy Pods Resources */ = {

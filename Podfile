@@ -14,4 +14,5 @@ pod 'GTSDK', '2.4.0.0-noidfa'
 #pod 'WXHCodeView'
 pod 'XHTextField'
 pod 'MHTextField', '~> 0.5'
+pod 'SharetraceSDK'
 end
