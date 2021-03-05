@@ -121,7 +121,7 @@
     
     NSString *params = [NSString stringWithFormat:@"{\"wxOpenid\":\"%@\",\"APPLOGIN\":\"T\"}", openid];
     NSString *paramsEncoding = [params stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *url = [NSString stringWithFormat:@"https://www.gxsd.mobi/gxsd-test/read/readUser/login?openId=%@&accountType=%@", openid, [Tools get_role]];
+    NSString *url = [NSString stringWithFormat:@"https://www.gxsd.mobi/gxsd-prod/read/readUser/login?openId=%@&accountType=%@", openid, [Tools get_role]];
     NSLog(@"请求APP用户信息参数：%@",url);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];

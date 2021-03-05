@@ -96,8 +96,8 @@
 
 
 // web链接
-#define k_update_url_student @"https://www.gxsd.mobi/gxsd-test/read/task/getAppUpdateByAppType?appType=studentAndroid"
-#define k_update_url_teacher @"https://www.gxsd.mobi/gxsd-test/read/task/getAppUpdateByAppType?appType=teacherAndroid"
+#define k_update_url_student @"https://www.gxsd.mobi/gxsd-prod/read/task/getAppUpdateByAppType?appType=studentAndroid"
+#define k_update_url_teacher @"https://www.gxsd.mobi/gxsd-prod/read/task/getAppUpdateByAppType?appType=teacherAndroid"
 
 
 // 微信AppID

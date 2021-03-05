@@ -142,7 +142,7 @@
 }
 
 - (void)uploadUserInfo:(nullable NSString *)userId andOrganizationName:(nullable NSString *)organizationName andProvince:(nullable NSString *)province andCity:(nullable NSString *)city andArea:(nullable NSString *)area andAddress:(nullable NSString *)address andToken:(nullable NSString *)token {
-    NSString *url = @"https://www.gxsd.mobi/gxsd-test/app/user/updateUserInfo";
+    NSString *url = @"https://www.gxsd.mobi/gxsd-prod/app/user/updateUserInfo";
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager.requestSerializer setValue:token forHTTPHeaderField:@"token"];
     NSDictionary *params = @{@"userId": userId, @"organizationName": organizationName, @"province": province, @"city": city, @"area": area, @"address": address};

@@ -1281,7 +1281,7 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
     hud.label.text = @"提交评测信息...";
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"image/jpeg", nil];
-    [manager POST:@"https://www.gxsd.mobi/gxsd-test/system/upload" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:@"https://www.gxsd.mobi/gxsd-prod/system/upload" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:self.mp3Data name:@"file" fileName:KCAudioMp3Name mimeType:@"audio/wav"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         NSLog(@"上传进度：%@", uploadProgress);
