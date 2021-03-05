@@ -1144,7 +1144,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B54E9EF800DFD786F5143B1 /* Pods-QH_OrderS.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-teacher";
 				CODE_SIGN_ENTITLEMENTS = "QH_OrderS/高效速读.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -1183,7 +1183,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D9891314D5E289145FAAB882 /* Pods-QH_OrderS.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-teacher";
 				CODE_SIGN_ENTITLEMENTS = "QH_OrderS/高效速读.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
