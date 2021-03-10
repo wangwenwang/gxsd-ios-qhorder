@@ -180,4 +180,7 @@
 // URL解码
 + (nullable NSString *)URLDecodedString:(nullable NSString *)str;
 
+// 获取 Sharetrace AppKey
++ (nullable NSString *)get_SharetraceAppKey;
+
 @end

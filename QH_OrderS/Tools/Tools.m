@@ -320,4 +320,14 @@
     return decodedString;
 }
 
++ (nullable NSString *)get_SharetraceAppKey{
+    if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios"]){
+        return Sharetrace_student;
+    }else if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios-teacher"]){
+        return Sharetrace_teacher;
+    }else{
+        return Sharetrace_student;
+    }
+}
+
 @end

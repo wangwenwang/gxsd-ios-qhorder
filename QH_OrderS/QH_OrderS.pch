@@ -115,6 +115,11 @@
 #define BDMAPAK_teacher @"9eTQbQWcfwmmPR69Fx0stl4sLC54nXkd"
 
 
+// Sharetrace
+#define Sharetrace_student @"9c474737756d117f"
+#define Sharetrace_teacher @"88e7bea3c760a53b"
+
+
 // 反地理编码函数，把位置告诉Vue
 #define GeoOfTellVue @"GeoOfTellVue"
 

@@ -95,7 +95,7 @@
     //Configure and initialize iflytek services.(This interface must been invoked in application:didFinishLaunchingWithOptions:)
     [IFlySpeechUtility createUtility:initString];
     
-    [Sharetrace initWithDelegate:self appKey:@"88e7bea3c760a53b"];
+    [Sharetrace initWithDelegate:self appKey:[Tools get_SharetraceAppKey]];
     
     return YES;
 }
