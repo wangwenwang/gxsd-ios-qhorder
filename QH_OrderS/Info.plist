@@ -33,16 +33,6 @@
 				<string>wxe6d00f631717f3c1</string>
 			</array>
 		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>SharetraceUrlType</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>88e7bea3c760a53b</string>
-			</array>
-		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
