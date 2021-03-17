@@ -525,6 +525,17 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
                 [weakSelf WXSendImage:im withShareScene:WXSceneTimeline];
             });
         }
+        // 分享图片-聊天界面
+        else if([message.body[@"a"] isEqualToString:@"分享图片-聊天界面"]) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                UIView *vw = weakSelf.webView;
+                
+                UIImage *im = [weakSelf makeImageWithView:vw withSize:CGSizeMake(CGRectGetWidth(vw.frame), CGRectGetHeight(vw.frame))];
+                [weakSelf WXSendImage:im withShareScene:WXSceneSession];
+            });
+        }
         // 检查更新
         else if([message.body[@"a"] isEqualToString:@"检查APP和VUE版本更新"]) {
             
