@@ -82,7 +82,7 @@
 		3B435698233DFE0400D38552 /* YBShowPanoranaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B43568C233DFE0400D38552 /* YBShowPanoranaVC.m */; };
 		3B435699233DFE0400D38552 /* YBLocationPickerViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B43568D233DFE0400D38552 /* YBLocationPickerViewController.mm */; };
 		3B43569A233DFE0400D38552 /* BaiduPanoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B435690233DFE0400D38552 /* BaiduPanoSDK.framework */; };
-		3B5D4236260DE33E0086D873 /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3B5D4235260DE33E0086D873 /* dist.zip */; };
+		3B5D423E260DE69C0086D873 /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3B5D423D260DE69C0086D873 /* dist.zip */; };
 		3B79284F22F432AF009FCAF8 /* LMGetLoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284922F432AF009FCAF8 /* LMGetLoc.m */; };
 		3B79285022F432AF009FCAF8 /* IOSToVue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284A22F432AF009FCAF8 /* IOSToVue.m */; };
 		3B79285122F432AF009FCAF8 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284B22F432AF009FCAF8 /* Tools.m */; };
@@ -248,7 +248,7 @@
 		3B43568D233DFE0400D38552 /* YBLocationPickerViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YBLocationPickerViewController.mm; sourceTree = "<group>"; };
 		3B435690233DFE0400D38552 /* BaiduPanoSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduPanoSDK.framework; sourceTree = "<group>"; };
 		3B54E9EF800DFD786F5143B1 /* Pods-QH_OrderS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QH_OrderS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS.debug.xcconfig"; sourceTree = "<group>"; };
-		3B5D4235260DE33E0086D873 /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
+		3B5D423D260DE69C0086D873 /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
 		3B79284922F432AF009FCAF8 /* LMGetLoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMGetLoc.m; sourceTree = "<group>"; };
 		3B79284A22F432AF009FCAF8 /* IOSToVue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOSToVue.m; sourceTree = "<group>"; };
 		3B79284B22F432AF009FCAF8 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
@@ -380,7 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				3BBB5D3D2466620D002FE6A3 /* 高效速读.entitlements */,
-				3B5D4235260DE33E0086D873 /* dist.zip */,
+				3B5D423D260DE69C0086D873 /* dist.zip */,
 				3B04E18522DD757F005840FC /* Default-568@2x.png */,
 				3BE88E9E232169FD008AC8E7 /* Custum */,
 				3B2CFB7F231D3E9F0039C483 /* Category */,
@@ -840,7 +840,7 @@
 				3B435695233DFE0400D38552 /* YBShowLocationVC.xib in Resources */,
 				3B435693233DFE0400D38552 /* YBCurrentLocationCell.xib in Resources */,
 				3B435691233DFE0400D38552 /* YBNeighborLocationCell.xib in Resources */,
-				3B5D4236260DE33E0086D873 /* dist.zip in Resources */,
+				3B5D423E260DE69C0086D873 /* dist.zip in Resources */,
 				3B35F6882594EED3001C9E81 /* ISEViewController.xib in Resources */,
 				3B04E18622DD757F005840FC /* Default-568@2x.png in Resources */,
 			);
