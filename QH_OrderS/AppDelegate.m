@@ -70,7 +70,7 @@
     [_window makeKeyAndVisible];
     
     // 注册微信凭证
-    BOOL b = [WXApi registerApp:[Tools get_WXAPPID] universalLink:@"https://tms.kaidongyuan.com"];
+    BOOL b = [WXApi registerApp:[Tools get_WXAPPID] universalLink:[Tools get_Universal_Links]];
     
     if(b) { NSLog(@"微信注册--成功");}
     else  { NSLog(@"微信注册--失败");}

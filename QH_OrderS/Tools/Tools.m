@@ -267,6 +267,16 @@
     }
 }
 
++ (nullable NSString *)get_Universal_Links{
+    if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios"]){
+        return Universal_Links_student;
+    }else if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios-teacher"]){
+        return Universal_Links_teacher;
+    }else{
+        return Universal_Links_student;
+    }
+}
+
 + (nullable NSString *)get_WXAPPSECRED{
     if([[[NSBundle mainBundle]bundleIdentifier] isEqualToString:@"mobi.gxsd.gxsd-ios"]){
         return WXAPPSECRED_student;

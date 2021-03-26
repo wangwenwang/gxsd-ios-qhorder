@@ -46,7 +46,7 @@
 
 #define kUserDefaults_ZipVersion_local_key @"ZipVersion"
 
-#define kUserDefaults_ZipVersion_local_defaultValue @"1.5.4"
+#define kUserDefaults_ZipVersion_local_defaultValue @"1.6.0"
 
 #define kUserDefaults_Server_Address_key @"ServerAddress"
 
@@ -103,6 +103,11 @@
 // 微信AppID
 #define WXAPPID_student @"wxdce29e3a76e0c723"
 #define WXAPPID_teacher @"wxe6d00f631717f3c1"
+
+
+// Universal_Links
+#define Universal_Links_student @"https://gxsd.mobi/student/"
+#define Universal_Links_teacher @"https://gxsd.mobi/teacher/"
 
 
 // 微信AppSecret

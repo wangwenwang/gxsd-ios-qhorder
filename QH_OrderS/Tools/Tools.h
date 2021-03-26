@@ -163,6 +163,10 @@
 + (nullable NSString *)get_WXAPPID;
 
 
+/// 获取 Universal Links
++ (nullable NSString *)get_Universal_Links;
+
+
 /// 获取微信AppSecred
 + (nullable NSString *)get_WXAPPSECRED;
 
