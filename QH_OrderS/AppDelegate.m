@@ -75,6 +75,13 @@
     if(b) { NSLog(@"微信注册--成功");}
     else  { NSLog(@"微信注册--失败");}
     
+//    [WXApi startLogByLevel:WXLogLevelNormal logBlock:^(NSString *log) {
+//        NSLog(@"log : %@", log);
+//    }];
+//    
+//    //向微信注册,发起支付必须注册
+//    [WXApi registerApp:@"wxf4c0b12e47ec4cf9" universalLink:[Tools get_Universal_Links]];
+    
     // 检查HTML zip 是否有更新
     [self checkZipVersion];
     
@@ -338,18 +345,18 @@
     NSLog(@"");
 }
 
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
-    
-    if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
-        NSURL *webpageURL = userActivity.webpageURL;
-        NSString *host = webpageURL.host;
-        if ([host isEqualToString:@"××××.mingpao.com"]) {
-            //判断域名是自己的网站，进行我们需要的处理
-        }else{
-            [[UIApplication sharedApplication]openURL:webpageURL];
-        }
-    }
-    return YES;
-}
+//- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
+//    
+//    if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
+//        NSURL *webpageURL = userActivity.webpageURL;
+//        NSString *host = webpageURL.host;
+//        if ([host isEqualToString:@"××××.mingpao.com"]) {
+//            //判断域名是自己的网站，进行我们需要的处理
+//        }else{
+//            [[UIApplication sharedApplication]openURL:webpageURL];
+//        }
+//    }
+//    return YES;
+//}
               
 @end
