@@ -61,6 +61,7 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
 @property (nonatomic, assign) BOOL is_begin;
 @property (nonatomic, strong) NSString *result_xmlBase64;
 @property (nonatomic, strong) NSData *mp3Data;
+@property (nonatomic, strong) MBProgressHUD *hud_parsing;
 
 @end
 
@@ -1164,10 +1165,31 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
         fclose(mp3);
         fclose(pcm);
         NSLog(@"pcm转mp3成功");
+        WeakSelf
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.hud_parsing.label.text = @"解析完成";
+            });
+        });
     }
     @catch (NSException *exception) {
+        WeakSelf
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.hud_parsing.label.text = @"解析失败";
+            });
+        });
         NSLog(@"pcm转mp3失败%@",[exception description]);
     }
+    @finally {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            sleep(1.5);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+            });
+        });
+    }
+    
 }
 
 - (NSString *)getCachesMp3Path {
@@ -1196,6 +1218,8 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
         [IOSToVue TellVueStartRecord:weakSelf.webView];
     }else{
         NSLog(@"结束录制");
+        _hud_parsing = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        _hud_parsing.label.text = @"解析中...";
         [self onBtnStop];
         [IOSToVue TellVueStopRecord:weakSelf.webView];
     }
