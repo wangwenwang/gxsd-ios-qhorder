@@ -612,6 +612,19 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
                 NSLog(@"ShareTrace fail: code：%ld; message：%@", code, message);
             }];
         }
+        // 支付
+        else if([message.body[@"a"] isEqualToString:@"支付"]) {
+            
+            // 调起微信支付
+            PayReq* req        = [[PayReq alloc] init];
+            req.partnerId      = message.body[@"b"];
+            req.prepayId       = message.body[@"c"];
+            req.nonceStr       = message.body[@"d"];
+            req.timeStamp      = [message.body[@"e"] intValue];
+            req.package        = message.body[@"f"];
+            req.sign           = message.body[@"g"];
+            [WXApi sendReq:req completion:nil];
+        }
     }
 }
 
