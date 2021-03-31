@@ -69,19 +69,6 @@
     _window.rootViewController = mainView;
     [_window makeKeyAndVisible];
     
-    // 注册微信凭证
-    BOOL b = [WXApi registerApp:[Tools get_WXAPPID] universalLink:[Tools get_Universal_Links]];
-    
-    if(b) { NSLog(@"微信注册--成功");}
-    else  { NSLog(@"微信注册--失败");}
-    
-//    [WXApi startLogByLevel:WXLogLevelNormal logBlock:^(NSString *log) {
-//        NSLog(@"log : %@", log);
-//    }];
-//    
-//    //向微信注册,发起支付必须注册
-//    [WXApi registerApp:@"wxf4c0b12e47ec4cf9" universalLink:[Tools get_Universal_Links]];
-    
     // 检查HTML zip 是否有更新
     [self checkZipVersion];
     

@@ -429,6 +429,7 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
         }
         else if([message.body[@"a"] isEqualToString:@"微信登录"]){
             
+            [WXApi registerApp:[Tools get_WXAPPID] universalLink:[Tools get_Universal_Links]];
             SendAuthReq* req = [[SendAuthReq alloc] init];
             req.scope = @"snsapi_userinfo";
             req.state = @"wechat_sdk_tms";
@@ -615,6 +616,7 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
         // 支付
         else if([message.body[@"a"] isEqualToString:@"支付"]) {
             
+            [WXApi registerApp:@"wxf4c0b12e47ec4cf9" universalLink:[Tools get_Universal_Links]];
             // 调起微信支付
             PayReq* req        = [[PayReq alloc] init];
             req.partnerId      = message.body[@"b"];
