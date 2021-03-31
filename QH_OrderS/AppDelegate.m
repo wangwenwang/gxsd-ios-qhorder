@@ -121,13 +121,15 @@
 }
 
 
-// 获取tms用户信息
+// 获取用户信息
 - (void)bindingWX:(NSString *)openid {
+    
+    if(!openid){
+        return;
+    }
     
     WeakSelf;
     
-    NSString *params = [NSString stringWithFormat:@"{\"wxOpenid\":\"%@\",\"APPLOGIN\":\"T\"}", openid];
-    NSString *paramsEncoding = [params stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *url = [NSString stringWithFormat:@"https://www.gxsd.mobi/gxsd-prod/read/readUser/login?openId=%@&accountType=%@", openid, [Tools get_role]];
     NSLog(@"请求APP用户信息参数：%@",url);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -136,25 +138,14 @@
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
         NSDictionary *result = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] toDict];
-
         int code = [result[@"code"] intValue];
         id data = result[@"data"];
-        NSString *message = result[@"message"];
-
         if(code == 200) {
 
             NSString *params = [data toString];
             NSString *_params = [params stringByReplacingOccurrencesOfString:@"\n"withString:@""];
             NSString *__params = [_params stringByReplacingOccurrencesOfString:@" "withString:@""];
-            NSString *paramsEncoding = [params stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            
-//            NSString *js = [NSString stringWithFormat:@"WXBind_YES_Ajax('%@')", __params];
-//            [weakSelf.webView evaluateJavaScript:js completionHandler:^(id _Nullable resp, NSError * _Nullable error) {
-//                NSLog(@"error = %@ , response = %@",error, resp);
-//            }];
-            
             [IOSToVue TellVueWXBind_YES_Ajax:weakSelf.webView andParamsEncoding:__params];
-            
             NSLog(@"请求APP用户信息成功");
         } else{
             
