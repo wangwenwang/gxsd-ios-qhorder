@@ -616,7 +616,7 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
         // 支付
         else if([message.body[@"a"] isEqualToString:@"支付"]) {
             
-            [WXApi registerApp:@"wxf4c0b12e47ec4cf9" universalLink:[Tools get_Universal_Links]];
+            [WXApi registerApp:message.body[@"h"] universalLink:[Tools get_Universal_Links]];
             // 调起微信支付
             PayReq* req        = [[PayReq alloc] init];
             req.partnerId      = message.body[@"b"];
