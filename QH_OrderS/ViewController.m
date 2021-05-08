@@ -109,6 +109,9 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
         [Tools showAlert:self.view andTitle:@"未知设备" andTime:5];
     }
     
+    // 注册微信 appid
+    [WXApi registerApp:[Tools get_WXAPPID] universalLink:[Tools get_Universal_Links]];
+    
     [imageV setImage:[UIImage imageNamed:imageName]];
     [imageV setFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     [self.view addSubview:imageV];
@@ -429,7 +432,6 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
         }
         else if([message.body[@"a"] isEqualToString:@"微信登录"]){
             
-            [WXApi registerApp:[Tools get_WXAPPID] universalLink:[Tools get_Universal_Links]];
             SendAuthReq* req = [[SendAuthReq alloc] init];
             req.scope = @"snsapi_userinfo";
             req.state = @"wechat_sdk_tms";
