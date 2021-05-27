@@ -62,6 +62,7 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
 @property (nonatomic, strong) NSString *result_xmlBase64;
 @property (nonatomic, strong) NSData *mp3Data;
 @property (nonatomic, strong) MBProgressHUD *hud_parsing;
+@property (nonatomic, strong) NSString *record_status; // 录制状态
 
 @end
 
@@ -555,6 +556,7 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
         // 录音
         else if([message.body[@"a"] isEqualToString:@"录音"]) {
             
+            self.record_status = message.body[@"a"];
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSString *b = message.body[@"b"];
 //                ISEViewController *vc = [[ISEViewController alloc] init];
@@ -564,11 +566,17 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
                 [self read_click:b];
             });
         }
-        // 录音
+        // 销毁录音
         else if([message.body[@"a"] isEqualToString:@"销毁录音"]) {
             
+            self.record_status = message.body[@"a"];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self onBtnStop];
+                __weak __typeof(self)weakSelf = self;
+                if(self.is_begin){
+                    weakSelf.hud_parsing = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    weakSelf.hud_parsing.label.text = @"结束中...";
+                }
+                [self stop_record:@"stop"];
                 self.is_begin = false;
             });
         }
@@ -1034,7 +1042,10 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
  *  volume callback,range from 0 to 30.
  */
 - (void)onVolumeChanged:(int)volume buffer:(NSData *)buffer {
-        NSLog(@"volume:%d",volume);
+    
+    NSLog(@"volume:%d",volume);
+    WeakSelf
+    [IOSToVue TellVueRecordVolume:weakSelf.webView andVolume:volume];
 }
 
 /*!
@@ -1185,7 +1196,11 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
         WeakSelf
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                weakSelf.hud_parsing.label.text = @"解析完成";
+                if([weakSelf.record_status isEqualToString:@"销毁录音"]){
+                    weakSelf.hud_parsing.label.text = @"结束完成";
+                }else{
+                    weakSelf.hud_parsing.label.text = @"解析完成";
+                }
             });
         });
     }
@@ -1237,9 +1252,15 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
         NSLog(@"结束录制");
         _hud_parsing = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         _hud_parsing.label.text = @"解析中...";
-        [self onBtnStop];
-        [IOSToVue TellVueStopRecord:weakSelf.webView];
+        [self stop_record:@"complete"];
     }
+}
+
+- (void)stop_record:(nullable NSString *)status {
+    
+    __weak __typeof(self)weakSelf = self;
+    [self onBtnStop];
+    [IOSToVue TellVueStopRecord:weakSelf.webView nextStatus:status];
 }
 
 - (void)onBtnStart:(NSString *)read_content {

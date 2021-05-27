@@ -63,8 +63,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 开始录制，语音评测
 + (void)TellVueStartRecord:(nullable WKWebView *)webView;
 
-/// 结束录制，语音评测
-+ (void)TellVueStopRecord:(nullable WKWebView *)webView;
+/// 录制音量
++ (void)TellVueRecordVolume:(nullable WKWebView *)webView andVolume:(int)volume;
+
+/// 结束录制，语音评测，status：complete 或 stop
++ (void)TellVueStopRecord:(nullable WKWebView *)webView nextStatus:(nullable NSString *)status;
 
 /// 更新用户信息已完成
 + (void)TellVueUpdateUserInfoCompleted:(nullable WKWebView *)webView;

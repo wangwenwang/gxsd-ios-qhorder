@@ -106,9 +106,15 @@
     [IOSToVue TellVueMsg:webView andJsStr:jsStr];
 }
 
-+ (void)TellVueStopRecord:(nullable WKWebView *)webView {
++ (void)TellVueRecordVolume:(nullable WKWebView *)webView andVolume:(int)volume {
     
-    NSString *jsStr = [NSString stringWithFormat:@"LM_AndroidIOSToVue_stopRecord()"];
+    NSString *jsStr = [NSString stringWithFormat:@"LM_AndroidIOSToVue_recordVolume('%d')", volume];
+    [IOSToVue TellVueMsg:webView andJsStr:jsStr];
+}
+
++ (void)TellVueStopRecord:(nullable WKWebView *)webView nextStatus:(nullable NSString *)status {
+    
+    NSString *jsStr = [NSString stringWithFormat:@"LM_AndroidIOSToVue_stopRecord('%@')", status];
     [IOSToVue TellVueMsg:webView andJsStr:jsStr];
 }
 
