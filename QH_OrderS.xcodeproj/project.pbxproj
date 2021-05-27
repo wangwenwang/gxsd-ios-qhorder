@@ -88,6 +88,7 @@
 		3B79285122F432AF009FCAF8 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284B22F432AF009FCAF8 /* Tools.m */; };
 		3BA4772B259FFD280078F57E /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA4772A259FFD280078F57E /* iflyMSC.framework */; };
 		3BA4773225A07AC00078F57E /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA4773025A07AC00078F57E /* libmp3lame.a */; };
+		3BCCA66B265F7FE600FD4388 /* fandu.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3BCCA66A265F7FE600FD4388 /* fandu.m4a */; };
 		3BD20FA4230A9E73001A52A4 /* ServiceTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD20FA2230A9E73001A52A4 /* ServiceTools.m */; };
 		3BD20FAC230AC9CE001A52A4 /* BMKLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD20FAB230AC9CE001A52A4 /* BMKLocationKit.framework */; };
 		3BE88EA3232169FD008AC8E7 /* LocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE88EA0232169FD008AC8E7 /* LocationModel.m */; };
@@ -260,6 +261,7 @@
 		3BA4773125A07AC00078F57E /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
 		3BBB5D3D2466620D002FE6A3 /* 高效速读.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "高效速读.entitlements"; sourceTree = "<group>"; };
 		3BBF8B66233B616F0070A8ED /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		3BCCA66A265F7FE600FD4388 /* fandu.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = fandu.m4a; sourceTree = "<group>"; };
 		3BD20FA2230A9E73001A52A4 /* ServiceTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceTools.m; sourceTree = "<group>"; };
 		3BD20FA3230A9E73001A52A4 /* ServiceTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceTools.h; sourceTree = "<group>"; };
 		3BD20FAB230AC9CE001A52A4 /* BMKLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BMKLocationKit.framework; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				3BBB5D3D2466620D002FE6A3 /* 高效速读.entitlements */,
+				3BCCA66A265F7FE600FD4388 /* fandu.m4a */,
 				3B6DF9802613431100F69C4B /* dist.zip */,
 				3B04E18522DD757F005840FC /* Default-568@2x.png */,
 				3BE88E9E232169FD008AC8E7 /* Custum */,
@@ -838,6 +841,7 @@
 				3B297DC922DD6D760028847C /* LaunchScreen.storyboard in Resources */,
 				3B297DC622DD6D760028847C /* Assets.xcassets in Resources */,
 				3B435695233DFE0400D38552 /* YBShowLocationVC.xib in Resources */,
+				3BCCA66B265F7FE600FD4388 /* fandu.m4a in Resources */,
 				3B435693233DFE0400D38552 /* YBCurrentLocationCell.xib in Resources */,
 				3B435691233DFE0400D38552 /* YBNeighborLocationCell.xib in Resources */,
 				3B6DF9812613431100F69C4B /* dist.zip in Resources */,

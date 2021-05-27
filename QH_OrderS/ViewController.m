@@ -63,6 +63,7 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
 @property (nonatomic, strong) NSData *mp3Data;
 @property (nonatomic, strong) MBProgressHUD *hud_parsing;
 @property (nonatomic, strong) NSString *record_status; // 录制状态
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer; // 朗诵背诵范读
 
 @end
 
@@ -73,6 +74,9 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
     [super viewDidLoad];
     
     [self addWebView];
+    
+    NSURL *url = [NSURL fileURLWithPath: [[NSBundle mainBundle] pathForResource:@"fandu.m4a" ofType:nil]];
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
     
     UIImageView *imageV = [[UIImageView alloc] init];
     
@@ -579,6 +583,22 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
                 [self stop_record:@"stop"];
                 self.is_begin = false;
             });
+        }
+        // 播放范读
+        else if([message.body[@"a"] isEqualToString:@"播放范读"]) {
+            
+            [self.audioPlayer play];
+        }
+        // 暂停范读
+        else if([message.body[@"a"] isEqualToString:@"暂停范读"]) {
+            
+            [self.audioPlayer pause];
+        }
+        // 停止范读
+        else if([message.body[@"a"] isEqualToString:@"停止范读"]) {
+            
+            [self.audioPlayer stop];
+            [self.audioPlayer playAtTime:0];
         }
         // 上传mp3文件，将评测结果返回给vue
         else if([message.body[@"a"] isEqualToString:@"请求评测结果"]) {
