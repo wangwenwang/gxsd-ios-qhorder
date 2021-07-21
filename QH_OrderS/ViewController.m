@@ -37,6 +37,7 @@
 #import "lame.h"
 
 #import <SharetraceSDK/SharetraceSDK.h>
+#import "JVERIFICATIONService.h"
 
 #define IFLY_AUDIO_SOURCE_STREAM @"-1"
 
@@ -45,7 +46,13 @@
 NSString* const KCAudioPcmName=@"iOS";
 NSString* const KCAudioMp3Name=@"iOS.mp3";
 
-@interface ViewController ()<UIGestureRecognizerDelegate, ABPeoplePickerNavigationControllerDelegate, CNContactPickerDelegate, ServiceToolsDelegate, WKUIDelegate, WKScriptMessageHandler, IFlyPcmRecorderDelegate, IFlySpeechEvaluatorDelegate>
+@interface ViewController ()<UIGestureRecognizerDelegate, ABPeoplePickerNavigationControllerDelegate, CNContactPickerDelegate, ServiceToolsDelegate, WKUIDelegate, WKScriptMessageHandler, IFlyPcmRecorderDelegate, IFlySpeechEvaluatorDelegate>{
+    JVUIConfig * _config;
+}
+@property (strong, nonatomic) UIButton *phoneBtn;
+@property (strong, nonatomic) UIButton *rightPhoneBtn;
+@property (strong, nonatomic) UIView *bgBtsView;
+@property (weak, nonatomic) UIView *customView;
 
 @property (strong, nonatomic) AppDelegate *app;
 
@@ -72,6 +79,15 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    if(![Tools getUserInfo]){
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            sleep(2);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self fast_login_click];
+            });
+        });
+    }
     
     [self addWebView];
     
@@ -138,6 +154,189 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
     }];
 }
 
+- (void)fast_login_click{
+    WeakSelf
+    [self customUI];
+    [JVERIFICATIONService getAuthorizationWithController:self hide:NO completion:^(NSDictionary *result) {
+        NSLog(@"一键登录 result:%@", result.description);
+        NSString *token = result[@"loginToken"];
+        if (token) {
+            ServiceTools *s = [[ServiceTools alloc] init];
+            s.webview = weakSelf.webView;
+            s.delegate = self;
+            [s getPhone:token];
+        }
+    } actionBlock:^(NSInteger type, NSString *content) { }];
+}
+
+- (void)phoneBtnClick{
+    [JVERIFICATIONService dismissLoginControllerAnimated:YES completion:NULL];
+}
+
+- (void)customUI{
+    
+    //手机号登录
+    UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.phoneBtn = phoneBtn;
+    [phoneBtn addTarget:self action:@selector(phoneBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    phoneBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [phoneBtn setTitle:@"手机号登录" forState:UIControlStateNormal];
+    [phoneBtn setTitleColor:[UIColor colorWithRed:143/255.0 green:143/255.0 blue:151/255.0 alpha:1/1.0] forState:UIControlStateNormal];
+    
+    JVUIConfig *config = [[JVUIConfig alloc] init];
+    config.navReturnImg = [UIImage imageNamed:@"lm_close_blue"];
+    config.autoLayout = YES;
+    config.navText = [[NSAttributedString alloc]initWithString:@"登录统一认证" attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:[UIFont systemFontOfSize:18]}];
+    config.navDividingLineHidden = YES;
+    config.prefersStatusBarHidden = NO;
+    _config = config;
+    _config.navControl = [[UIBarButtonItem alloc] initWithCustomView:self.rightPhoneBtn];
+    config.privacyComponents = @[@"同意《",@"",@"",@"》并授权高效速读获取本机号码"];
+    config.navColor = [UIColor whiteColor];
+    config.sloganTextColor = [UIColor colorWithRed:187/255.0 green:188/255.0 blue:197/255.0 alpha:1/1.0];
+    //logo
+    config.logoImg = [UIImage imageNamed:@"logo_icon"];
+    CGFloat logoWidth = 76;
+    CGFloat logoHeight = logoWidth;
+    CGFloat windowW = self.view.frame.size.width;
+    JVLayoutConstraint *logoConstraintX = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    JVLayoutConstraint *logoConstraintY = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeTop multiplier:1 constant:76];
+    JVLayoutConstraint *logoConstraintW = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeWidth multiplier:1 constant:logoWidth];
+    JVLayoutConstraint *logoConstraintH = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeHeight multiplier:1 constant:logoHeight];
+    config.logoConstraints = @[logoConstraintX,logoConstraintY,logoConstraintW,logoConstraintH];
+    
+    //横屏
+    JVLayoutConstraint *logoConstraintY1 = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeTop multiplier:1 constant:20];
+    config.logoHorizontalConstraints = @[logoConstraintX,logoConstraintY1,logoConstraintH,logoConstraintW];
+    
+    //号码栏
+    JVLayoutConstraint *numberConstraintX = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    JVLayoutConstraint *numberConstraintY = [JVLayoutConstraint constraintWithAttribute: NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemLogo attribute:NSLayoutAttributeBottom multiplier:1 constant:16];
+    JVLayoutConstraint *numberConstraintW = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeWidth multiplier:1 constant:130];
+    JVLayoutConstraint *numberConstraintH = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeHeight multiplier:1 constant:25];
+    config.numberConstraints = @[numberConstraintX,numberConstraintY,numberConstraintW,numberConstraintH];
+    
+    //slogan展示
+    JVLayoutConstraint *sloganConstraintX = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    JVLayoutConstraint *sloganConstraintY = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNumber attribute:NSLayoutAttributeBottom   multiplier:1 constant:8];
+    JVLayoutConstraint *sloganConstraintW = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeWidth multiplier:1 constant:130];
+    JVLayoutConstraint *sloganConstraintH = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeHeight multiplier:1 constant:20];
+    config.sloganConstraints = @[sloganConstraintX,sloganConstraintY,sloganConstraintW,sloganConstraintH];
+    
+    //登录按钮
+    UIImage *login_nor_image = [UIImage imageNamed:@"btn_42px"];
+    UIImage *login_dis_image = [UIImage imageNamed:@"btn_42px_null"];
+    UIImage *login_hig_image = [UIImage imageNamed:@"btn_42px_press"];
+    if (login_nor_image && login_dis_image && login_hig_image) {
+        config.logBtnImgs = @[login_nor_image, login_dis_image, login_hig_image];
+    }
+    config.logBtnText = @"一键登录";
+    CGFloat loginButtonWidth = 260;
+    CGFloat loginButtonHeight = 42;
+    JVLayoutConstraint *loginConstraintX = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    JVLayoutConstraint *loginConstraintY = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSlogan attribute:NSLayoutAttributeBottom multiplier:1 constant:22];
+    JVLayoutConstraint *loginConstraintW = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeWidth multiplier:1 constant:loginButtonWidth];
+    JVLayoutConstraint *loginConstraintH = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeHeight multiplier:1 constant:loginButtonHeight];
+    config.logBtnConstraints = @[loginConstraintX,loginConstraintY,loginConstraintW,loginConstraintH];
+    
+    //勾选框
+    UIImage * uncheckedImg = [UIImage imageNamed:@"checkBox_unSelected"];
+    UIImage * checkedImg = [UIImage imageNamed:@"checkBox_selected"];
+    CGFloat checkViewWidth = 11;
+    CGFloat checkViewHeight = 11;
+    CGFloat spacing = (windowW - 300)/2;
+    config.uncheckedImg = uncheckedImg;
+    config.checkedImg = checkedImg;
+    JVLayoutConstraint *checkViewConstraintX = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeRight multiplier:1 constant:spacing];
+    JVLayoutConstraint *checkViewConstraintY = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemPrivacy attribute:NSLayoutAttributeBottom multiplier:1 constant:-20];
+    JVLayoutConstraint *checkViewConstraintW = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeWidth multiplier:1 constant:checkViewWidth];
+    JVLayoutConstraint *checkViewConstraintH = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeHeight multiplier:1 constant:checkViewHeight];
+    config.checkViewConstraints = @[checkViewConstraintX,checkViewConstraintY,checkViewConstraintW,checkViewConstraintH];
+    
+    //隐私
+    config.privacyState = YES;
+    config.privacyTextFontSize = 11;
+    config.privacyTextAlignment = NSTextAlignmentCenter;
+    config.appPrivacyColor = @[[UIColor colorWithRed:187/255.0 green:188/255.0 blue:197/255.0 alpha:1/1.0],[UIColor colorWithRed:137/255.0 green:152/255.0 blue:255/255.0 alpha:1/1.0]];
+    JVLayoutConstraint *privacyConstraintX = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    JVLayoutConstraint *privacyConstraintW = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeWidth multiplier:1 constant:400];
+    JVLayoutConstraint *privacyConstraintY = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeBottom multiplier:1 constant:-25];
+    JVLayoutConstraint *privacyConstraintH = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeHeight multiplier:1 constant:14];
+    config.privacyConstraints = @[privacyConstraintX,privacyConstraintW,privacyConstraintY,privacyConstraintH];
+    JVLayoutConstraint *privacyConstraintY1 = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeBottom multiplier:1 constant:-16];
+    config.privacyHorizontalConstraints = @[privacyConstraintX,privacyConstraintW,privacyConstraintH,privacyConstraintY1];
+    
+    //loading
+    JVLayoutConstraint *loadingConstraintX = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    JVLayoutConstraint *loadingConstraintY = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    JVLayoutConstraint *loadingConstraintW = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeWidth multiplier:1 constant:30];
+    JVLayoutConstraint *loadingConstraintH = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeHeight multiplier:1 constant:30];
+    config.loadingConstraints = @[loadingConstraintX,loadingConstraintY,loadingConstraintW,loadingConstraintH];
+    [JVERIFICATIONService customUIWithConfig:config customViews:^(UIView *customAreaView) {
+        self.customView = customAreaView;
+        UIView *btnsView = [self btnsView];
+        self.bgBtsView = btnsView;
+        [self caculateCustomUIFrame];
+        [customAreaView addSubview:self.phoneBtn];
+        [customAreaView addSubview:btnsView];
+    }];
+}
+
+- (UIView*)btnsView{
+    UIView *btnView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 67)];
+    NSArray *imgs = @[@"o_qq",@"o_wechat",@"o_weibo"];
+    CGFloat width = 32 , height = 32;
+    CGFloat padding = 21;
+    CGFloat orgX = (300 - width *3 - padding*2)/2;
+    for (int i = 0; i < imgs.count; i++) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.tag = i + 10;
+        [btn setImage:[UIImage imageNamed:imgs[i]] forState:UIControlStateNormal];
+        btn.frame = CGRectMake(orgX + i*width + i*padding, 0, width, height);
+        [btn addTarget:self action:@selector(thirdPatyLogin) forControlEvents:UIControlEventTouchUpInside];
+        [btnView addSubview:btn];
+    }
+    return btnView;
+}
+
+- (void)thirdPatyLogin{
+    SendAuthReq* req = [[SendAuthReq alloc] init];
+    req.scope = @"snsapi_userinfo";
+    req.state = @"wechat_sdk_tms";
+    [WXApi sendReq:req completion:nil];
+}
+
+- (void)caculateCustomUIFrame{
+    if (!self.customView) {
+        return;
+    }
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    NSLog(@"customView:%@,orientation:%ld",self.customView,(long)[UIDevice currentDevice].orientation);
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    if (orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationPortraitUpsideDown) {
+        CGFloat x = (width - 78)/2;
+        CGFloat y = height - 320;
+        if(height > 736){
+            y = height - 500;
+        }else if(height == 736 ){
+            y = height - 380;
+        }
+        CGFloat statBarItemHeight = 49+35;
+        if (@available(iOS 11.0, *)) {
+            statBarItemHeight  += self.view.safeAreaInsets.bottom;
+        }
+        self.phoneBtn.frame = CGRectMake(x, y,78 , 18);
+        self.bgBtsView.frame = CGRectMake((width-300)/2, y+18+80, 300, 67);
+        self.rightPhoneBtn.hidden = YES;
+        self.phoneBtn.hidden = NO;
+    }else{
+        self.rightPhoneBtn.hidden = NO;
+        self.phoneBtn.hidden = YES;
+        self.phoneBtn.frame = CGRectMake(0, 0, 78, 18);
+        self.bgBtsView.frame = CGRectMake((width-300)/2, height-67-65, 300, 67);
+    }
+}
 
 #pragma mark - 检查版本
 
@@ -656,6 +855,13 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
             req.package        = message.body[@"f"];
             req.sign           = message.body[@"g"];
             [WXApi sendReq:req completion:nil];
+        }
+        // 一键登录
+        else if([message.body[@"a"] isEqualToString:@"一键登录"]) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self fast_login_click];
+            });
         }
     }
 }

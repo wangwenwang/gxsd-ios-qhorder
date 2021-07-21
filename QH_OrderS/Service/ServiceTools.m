@@ -11,12 +11,13 @@
 #import "AppDelegate.h"
 #import "IOSToVue.h"
 #import "ViewController.h"
+#import "NSString+toDict.h"
+#import "NSDictionary+toString.h"
+#import "JVERIFICATIONService.h"
 
 @interface ServiceTools()
 
 @property (strong, nonatomic) AppDelegate *app;
-
-@property (strong, nonatomic) WKWebView *webview;
 
 @end;
 
@@ -158,6 +159,62 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"请求失败---%@", error);
         [Tools showAlert:((AppDelegate*)([UIApplication sharedApplication].delegate)).window andTitle:@"请求失败"];
+    }];
+}
+
+- (void)getPhone:(nullable NSString *)loginToken {
+    
+    NSString *url = [NSString stringWithFormat:@"https://www.gxsd.mobi/gxsd-prod/system/jiGuang/loginTokenVerify?loginToken=%@", loginToken];
+    NSLog(@"通过token换取手机号参数：%@",url);
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager POST:url parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+
+        NSDictionary *result = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] toDict];
+        int code = [result[@"code"] intValue];
+        NSString *data = result[@"data"];
+        if(code == 200) {
+            
+            [JVERIFICATIONService dismissLoginControllerAnimated:YES completion:NULL];
+            [self login:data];
+            NSLog(@"通过token换取手机号成功");
+        }
+        NSLog(@"%@", result);
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+
+        NSLog(@"通过token换取手机号失败");
+    }];
+}
+
+- (void)login:(nullable NSString *)account {
+    
+    NSString *url = [NSString stringWithFormat:@"https://www.gxsd.mobi/gxsd-prod/read/readUser/login?account=%@&yzm=999999&accountType=%@&appType=iOS", account, [Tools get_role]];
+    NSLog(@"请求APP用户信息参数：%@",url);
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager POST:url parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *result = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] toDict];
+        int code = [result[@"code"] intValue];
+        id data = result[@"data"];
+        if(code == 200) {
+
+            NSString *params = [data toString];
+            NSString *_params = [params stringByReplacingOccurrencesOfString:@"\n"withString:@""];
+            NSString *__params = [_params stringByReplacingOccurrencesOfString:@" "withString:@""];
+            [JVERIFICATIONService dismissLoginControllerAnimated:YES completion:NULL];
+            [IOSToVue TellVueWXBind_YES_Ajax:self->_webview andParamsEncoding:__params];
+            NSLog(@"请求APP用户信息成功");
+        }else{
+            [Tools showAlert:((AppDelegate*)([UIApplication sharedApplication].delegate)).window andTitle:[NSString stringWithFormat:@"异常，错误码：%d", code]];
+        }
+        NSLog(@"%@", result);
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+
+        NSLog(@"请求APP用户信息失败");
     }];
 }
 

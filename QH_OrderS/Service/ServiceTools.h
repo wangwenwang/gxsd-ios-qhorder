@@ -27,6 +27,8 @@
 
 @interface ServiceTools : NSObject
 
+@property (strong, nonatomic) WKWebView * _Nullable webview;
+
 @property (strong, nonatomic) NSString * _Nullable abcd;
 
 @property (nullable, weak, nonatomic)id <ServiceToolsDelegate> delegate;
@@ -46,5 +48,10 @@
 /// @param address 详细地址
 /// @param token 公钥
 - (void)uploadUserInfo:(nullable NSString *)userId andOrganizationName:(nullable NSString *)organizationName andProvince:(nullable NSString *)province andCity:(nullable NSString *)city andArea:(nullable NSString *)area andAddress:(nullable NSString *)address andToken:(nullable NSString *)token;
+
+
+/// 获取手机号
+/// @param loginToken SDK获取的 token
+- (void)getPhone:(nullable NSString *)loginToken;
 
 @end

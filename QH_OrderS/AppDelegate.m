@@ -33,6 +33,9 @@
 
 #import <SharetraceSDK/SharetraceSDK.h>
 
+// 引入 JVerification 功能所需头文件
+#import "JVERIFICATIONService.h"
+
 @interface AppDelegate ()<ServiceToolsDelegate, WXApiDelegate, SharetraceDelegate>
 
 @property (strong, nonatomic) WKWebView *webView;
@@ -91,6 +94,14 @@
     
     [Sharetrace initWithDelegate:self appKey:[Tools get_SharetraceAppKey]];
     
+    //如需使用 IDFA 功能请添加此代码并在初始化配置类中设置 advertisingId
+    JVAuthConfig *config = [[JVAuthConfig alloc] init];
+    config.appKey = @"2d979eec051304180e1b7846";
+    config.authBlock = ^(NSDictionary *result) {
+        NSLog(@"初始化结果 result:%@", result);
+    };
+    [JVERIFICATIONService setupWithConfig:config];
+    
     return YES;
 }
 
@@ -132,6 +143,7 @@
             NSString *params = [data toString];
             NSString *_params = [params stringByReplacingOccurrencesOfString:@"\n"withString:@""];
             NSString *__params = [_params stringByReplacingOccurrencesOfString:@" "withString:@""];
+            [JVERIFICATIONService dismissLoginControllerAnimated:YES completion:NULL];
             [IOSToVue TellVueWXBind_YES_Ajax:weakSelf.webView andParamsEncoding:__params];
             NSLog(@"请求APP用户信息成功");
         } else{

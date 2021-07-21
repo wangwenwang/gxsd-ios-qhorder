@@ -394,6 +394,10 @@ Public License instead of this License.
 
 
 
+## JCore
+
+Copyright jpush.cn
+
 ## LMProgressView
 
 The MIT License (MIT)

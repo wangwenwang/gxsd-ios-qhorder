@@ -16,6 +16,9 @@ PODS:
     - AFNetworking/NSURLSession
   - BaiduMapKit (3.3.4)
   - GTSDK (2.4.0.0-noidfa)
+  - JCore (2.7.1-noidfa)
+  - JVerification (2.7.1):
+    - JCore (< 6.0.0, >= 2.1.6)
   - LMProgressView (1.0.3)
   - MBProgressHUD (1.0.0)
   - MHTextField (0.6)
@@ -28,6 +31,8 @@ DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - BaiduMapKit (~> 3.3.4)
   - GTSDK (= 2.4.0.0-noidfa)
+  - JCore (= 2.7.1-noidfa)
+  - JVerification (= 2.7.1)
   - LMProgressView
   - MBProgressHUD (~> 1.0.0)
   - MHTextField (~> 0.5)
@@ -41,6 +46,8 @@ SPEC REPOS:
     - AFNetworking
     - BaiduMapKit
     - GTSDK
+    - JCore
+    - JVerification
     - LMProgressView
     - MBProgressHUD
     - MHTextField
@@ -53,6 +60,8 @@ SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   BaiduMapKit: 6f2d76a04b72e9af938afb5ca0f97d4417bbf9c0
   GTSDK: 1774ee87826d0606f69b1c5114ed3bf63ad5c34e
+  JCore: b7c28cfc056f83ab8fb0208ef50e3b91103bcdc5
+  JVerification: 750dc6b4ce55e53d1095958267cfd2e9eb4398a1
   LMProgressView: f6fb98f7ad2a0ef00156f892eef6c99b7046b66c
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MHTextField: c13dad029b2a3da5e6a1c7adc7fa499ca8a976e5
@@ -61,6 +70,6 @@ SPEC CHECKSUMS:
   WechatOpenSDK: 6a4d1436c15b3b5fe2a0bd383f3046010186da44
   XHTextField: 67abde300d82c46940215dd939f96acda90f4e05
 
-PODFILE CHECKSUM: e1b7b50f95b30910b0ff9ee8e0c852b3b9d46cbf
+PODFILE CHECKSUM: 207bb8d32f988a2c3b6f8a6db16eaa9ab5f9c66d
 
 COCOAPODS: 1.9.3

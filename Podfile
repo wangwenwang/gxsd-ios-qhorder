@@ -15,4 +15,7 @@ pod 'GTSDK', '2.4.0.0-noidfa'
 pod 'XHTextField'
 pod 'MHTextField', '~> 0.5'
 pod 'SharetraceSDK'
+# 加推，一键登录
+pod 'JCore', '2.7.1-noidfa'
+pod 'JVerification', '2.7.1'
 end
