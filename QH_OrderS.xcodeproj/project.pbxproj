@@ -1152,7 +1152,7 @@
 				CODE_SIGN_ENTITLEMENTS = "QH_OrderS/高效速读.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = FXUDZ5557V;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1175,7 +1175,7 @@
 					"$(PROJECT_DIR)/QH_OrderS/Third/lame",
 					"$(PROJECT_DIR)/QH_OrderS/libs",
 				);
-				MARKETING_VERSION = 1.1.6;
+				MARKETING_VERSION = 1.1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "mobi.gxsd.gxsd-ios";
 				PRODUCT_NAME = "高效速读";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1191,7 +1191,7 @@
 				CODE_SIGN_ENTITLEMENTS = "QH_OrderS/高效速读.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = FXUDZ5557V;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1214,7 +1214,7 @@
 					"$(PROJECT_DIR)/QH_OrderS/Third/lame",
 					"$(PROJECT_DIR)/QH_OrderS/libs",
 				);
-				MARKETING_VERSION = 1.1.6;
+				MARKETING_VERSION = 1.1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "mobi.gxsd.gxsd-ios";
 				PRODUCT_NAME = "高效速读";
 				PROVISIONING_PROFILE_SPECIFIER = "";
