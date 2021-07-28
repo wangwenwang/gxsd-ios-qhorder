@@ -165,6 +165,8 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
             s.webview = weakSelf.webView;
             s.delegate = self;
             [s getPhone:token];
+        }else{
+            [Tools showAlert:self.view andTitle:@"当前网络环境不支持认证"];
         }
     } actionBlock:^(NSInteger type, NSString *content) { }];
 }
