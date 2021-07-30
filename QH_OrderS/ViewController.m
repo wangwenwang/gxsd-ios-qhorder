@@ -160,12 +160,14 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
     [JVERIFICATIONService getAuthorizationWithController:self hide:NO completion:^(NSDictionary *result) {
         NSLog(@"一键登录 result:%@", result.description);
         NSString *token = result[@"loginToken"];
+        int code = [result[@"code"] intValue];
         if (token) {
             ServiceTools *s = [[ServiceTools alloc] init];
             s.webview = weakSelf.webView;
             s.delegate = self;
             [s getPhone:token];
-        }else{
+        }
+        if(code == 2016){
             [Tools showAlert:self.view andTitle:@"当前网络环境不支持认证"];
         }
     } actionBlock:^(NSInteger type, NSString *content) { }];
