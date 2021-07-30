@@ -164,23 +164,24 @@
 
 - (void)getPhone:(nullable NSString *)loginToken {
     
-    NSString *url = [NSString stringWithFormat:@"https://www.gxsd.mobi/gxsd-prod/system/jiGuang/loginTokenVerify?loginToken=%@", loginToken];
-    NSLog(@"通过token换取手机号参数：%@",url);
+    NSString *url = [NSString stringWithFormat:@"https://www.gxsd.mobi/gxsd-prod/system/jiGuang/loginTokenVerifyBody"];
+    NSDictionary *params= @{@"loginToken":loginToken};
+    NSLog(@"通过token换取手机号参数：%@，%@", url, params);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager POST:url parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/plain", nil];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager POST:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
-        NSDictionary *result = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] toDict];
-        int code = [result[@"code"] intValue];
-        NSString *data = result[@"data"];
+        int code = [responseObject[@"code"] intValue];
+        NSString *data = responseObject[@"data"];
         if(code == 200) {
             
             [JVERIFICATIONService dismissLoginControllerAnimated:YES completion:NULL];
             [self login:data];
             NSLog(@"通过token换取手机号成功");
         }
-        NSLog(@"%@", result);
+        NSLog(@"%@", responseObject);
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 
