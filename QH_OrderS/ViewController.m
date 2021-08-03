@@ -80,14 +80,7 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
     
     [super viewDidLoad];
     
-    if(![Tools getUserInfo]){
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            sleep(2);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self fast_login_click];
-            });
-        });
-    }
+    [self checkZipVersion:NO];
     
     [self addWebView];
     
@@ -1248,6 +1241,9 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
                 if(unzip_b) {
                     
                     [Tools setZipVersion:version];
+                    if(![Tools getUserInfo]){
+                        [self fast_login_click];
+                    }
                 }else {
                     
                     NSLog(@"zip解压失败，不更新zip版本号");

@@ -121,6 +121,10 @@
                 [self downZip:server_zipDownloadUrl andVersion:server_zipVersion];
             }else{
                 
+                // 弹出一键登录页面
+                if(![Tools getUserInfo]){
+                    [self->_delegate fast_login_click];
+                }
                 if(showPrompt){
                     
                     [Tools showAlert:((AppDelegate*)([UIApplication sharedApplication].delegate)).window andTitle:@"已经是最新版本"];

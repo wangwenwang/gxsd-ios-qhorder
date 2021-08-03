@@ -22,6 +22,8 @@
 @optional
 - (void)downloadCompletion:(nullable NSString *)version andFilePath:(nullable NSString *)filePath;
 
+@optional
+- (void)fast_login_click;
 
 @end
 
