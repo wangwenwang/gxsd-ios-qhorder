@@ -46,7 +46,7 @@
 
 #define kUserDefaults_ZipVersion_local_key @"ZipVersion"
 
-#define kUserDefaults_ZipVersion_local_defaultValue @"2.2.1"
+#define kUserDefaults_ZipVersion_local_defaultValue @"2.2.5"
 
 #define kUserDefaults_Server_Address_key @"ServerAddress"
 

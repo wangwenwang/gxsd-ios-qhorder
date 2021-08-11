@@ -83,6 +83,9 @@
 		3B435699233DFE0400D38552 /* YBLocationPickerViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3B43568D233DFE0400D38552 /* YBLocationPickerViewController.mm */; };
 		3B43569A233DFE0400D38552 /* BaiduPanoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B435690233DFE0400D38552 /* BaiduPanoSDK.framework */; };
 		3B6DF9812613431100F69C4B /* dist.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3B6DF9802613431100F69C4B /* dist.zip */; };
+		3B73AEDB26C2816300791D1C /* TwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B73AEDA26C2816300791D1C /* TwoController.m */; };
+		3B73AEE026C2833400791D1C /* TwoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B73AEDF26C2833400791D1C /* TwoController.xib */; };
+		3B73AF6F26C36EDB00791D1C /* NotchScreenUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B73AF6D26C36EDB00791D1C /* NotchScreenUtil.m */; };
 		3B79284F22F432AF009FCAF8 /* LMGetLoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284922F432AF009FCAF8 /* LMGetLoc.m */; };
 		3B79285022F432AF009FCAF8 /* IOSToVue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284A22F432AF009FCAF8 /* IOSToVue.m */; };
 		3B79285122F432AF009FCAF8 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B79284B22F432AF009FCAF8 /* Tools.m */; };
@@ -250,6 +253,11 @@
 		3B435690233DFE0400D38552 /* BaiduPanoSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduPanoSDK.framework; sourceTree = "<group>"; };
 		3B54E9EF800DFD786F5143B1 /* Pods-QH_OrderS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QH_OrderS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QH_OrderS/Pods-QH_OrderS.debug.xcconfig"; sourceTree = "<group>"; };
 		3B6DF9802613431100F69C4B /* dist.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = dist.zip; sourceTree = "<group>"; };
+		3B73AEDA26C2816300791D1C /* TwoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwoController.m; sourceTree = "<group>"; };
+		3B73AEDC26C2817100791D1C /* TwoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwoController.h; sourceTree = "<group>"; };
+		3B73AEDF26C2833400791D1C /* TwoController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwoController.xib; sourceTree = "<group>"; };
+		3B73AF6D26C36EDB00791D1C /* NotchScreenUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotchScreenUtil.m; sourceTree = "<group>"; };
+		3B73AF6E26C36EDB00791D1C /* NotchScreenUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotchScreenUtil.h; sourceTree = "<group>"; };
 		3B79284922F432AF009FCAF8 /* LMGetLoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMGetLoc.m; sourceTree = "<group>"; };
 		3B79284A22F432AF009FCAF8 /* IOSToVue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOSToVue.m; sourceTree = "<group>"; };
 		3B79284B22F432AF009FCAF8 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
@@ -394,6 +402,9 @@
 				3B297DBD22DD6D750028847C /* AppDelegate.m */,
 				3B297DBF22DD6D750028847C /* ViewController.h */,
 				3B297DC022DD6D750028847C /* ViewController.m */,
+				3B73AEDC26C2817100791D1C /* TwoController.h */,
+				3B73AEDA26C2816300791D1C /* TwoController.m */,
+				3B73AEDF26C2833400791D1C /* TwoController.xib */,
 				3B297DC522DD6D760028847C /* Assets.xcassets */,
 				3B297DC722DD6D760028847C /* LaunchScreen.storyboard */,
 				3B297DCA22DD6D760028847C /* Info.plist */,
@@ -640,6 +651,8 @@
 		3B79284822F432AF009FCAF8 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				3B73AF6E26C36EDB00791D1C /* NotchScreenUtil.h */,
+				3B73AF6D26C36EDB00791D1C /* NotchScreenUtil.m */,
 				3B79284E22F432AF009FCAF8 /* Tools.h */,
 				3B79284B22F432AF009FCAF8 /* Tools.m */,
 				3B79284D22F432AF009FCAF8 /* LMGetLoc.h */,
@@ -838,6 +851,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B73AEE026C2833400791D1C /* TwoController.xib in Resources */,
 				3B297DC922DD6D760028847C /* LaunchScreen.storyboard in Resources */,
 				3B297DC622DD6D760028847C /* Assets.xcassets in Resources */,
 				3B435695233DFE0400D38552 /* YBShowLocationVC.xib in Resources */,
@@ -936,6 +950,7 @@
 				3B35F67B2594ECD3001C9E81 /* IATViewController.m in Sources */,
 				3B435697233DFE0400D38552 /* YBShowLocationVC.mm in Sources */,
 				3B35F6862594ED46001C9E81 /* SAMultisectorControl.m in Sources */,
+				3B73AEDB26C2816300791D1C /* TwoController.m in Sources */,
 				3B35F66C2594ECA1001C9E81 /* SBJson4StreamWriter.m in Sources */,
 				3B35F66E2594ECA1001C9E81 /* PcmPlayer.m in Sources */,
 				3B35F63D2594EC09001C9E81 /* ISEResultReadSyllable.m in Sources */,
@@ -947,6 +962,7 @@
 				3B35F6852594ED46001C9E81 /* AKPickerView.m in Sources */,
 				3B35F6392594EC09001C9E81 /* IVWViewController.m in Sources */,
 				3B2CFB8B231D3E9F0039C483 /* NSDictionary+Extension.m in Sources */,
+				3B73AF6F26C36EDB00791D1C /* NotchScreenUtil.m in Sources */,
 				3B435696233DFE0400D38552 /* YBLocationSearchResultViewController.m in Sources */,
 				3B35F6472594EC09001C9E81 /* ISEViewController.m in Sources */,
 				3B35F6462594EC09001C9E81 /* ISESettingViewController.m in Sources */,
@@ -1152,7 +1168,7 @@
 				CODE_SIGN_ENTITLEMENTS = "QH_OrderS/高效速读.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = FXUDZ5557V;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1175,7 +1191,7 @@
 					"$(PROJECT_DIR)/QH_OrderS/Third/lame",
 					"$(PROJECT_DIR)/QH_OrderS/libs",
 				);
-				MARKETING_VERSION = 1.1.9;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "mobi.gxsd.gxsd-ios";
 				PRODUCT_NAME = "高效速读";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1191,7 +1207,7 @@
 				CODE_SIGN_ENTITLEMENTS = "QH_OrderS/高效速读.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = FXUDZ5557V;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1214,7 +1230,7 @@
 					"$(PROJECT_DIR)/QH_OrderS/Third/lame",
 					"$(PROJECT_DIR)/QH_OrderS/libs",
 				);
-				MARKETING_VERSION = 1.1.9;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "mobi.gxsd.gxsd-ios";
 				PRODUCT_NAME = "高效速读";
 				PROVISIONING_PROFILE_SPECIFIER = "";
