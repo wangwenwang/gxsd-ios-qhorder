@@ -39,6 +39,8 @@
 #import <SharetraceSDK/SharetraceSDK.h>
 #import "JVERIFICATIONService.h"
 
+#import "TwoController.h"
+
 #define IFLY_AUDIO_SOURCE_STREAM @"-1"
 
 #pragma mark - const values
@@ -858,6 +860,15 @@ NSString* const KCAudioMp3Name=@"iOS.mp3";
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self fast_login_click];
+            });
+        }
+        else if([message.body[@"a"] isEqualToString:@"国网平台"]){
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                TwoController *vc = [[TwoController alloc] init];
+                vc.modalPresentationStyle = UIModalPresentationFullScreen;
+                [self presentViewController:vc animated:YES completion:nil];
             });
         }
     }
